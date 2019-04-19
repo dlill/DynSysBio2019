@@ -55,7 +55,7 @@ $$
 \dot{x} = f(x,\vec{p}) = p_1 x \left( 1-\frac{x}{p2} \right)
 $$
 
-find the points $\bar{x}$ where $\dot{x}=0 numerically.
+find the points $\bar{x}$ where $\dot{x}=0$, numerically.
 
 * Write one function `vh_ode(x, p)`` and one function `vh_ode_jacobian(x,p)` returning $\f(x,\vec{p})$ and $f'(x,\vec{p})$, respectively.
 * Implement the newton method $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ in a function `newton_solve(x0, p; prec = 1e-8)` with initial value `x0`, parameter vector `p` and precision `prec`. Stop the iterations when |xn+1−xn|< prec is reached.
