@@ -6,7 +6,7 @@
 * Install [JuliaPro](https://juliacomputing.com/products/juliapro.html): Open a terminal and execute the following commands.
 
     ```
-    cd
+    cd 
     git clone https://github.com/dlill/DynSysBio2019
     cd DynSysBio2019
     ./install.sh
@@ -24,8 +24,8 @@
 
 ## Exercise 2 - Getting to know Julia
 
-In your home-folder, create a new folder `~/DynSysBio2019_programming`.
-In Atom, create a new file "~/DynSysBio2019_programming/tutorial0.jl" and solve the following questions in this script.
+Create a new folder `~/DynSysBio2019_programming`.
+Create a new file "~/DynSysBio2019_programming/tutorial0.jl" to solve the following questions in this script.
 
 1. Create a 3x3 matrix  ``A = <p align="center"><img src="/Exercises/tex/97b1ff475a4ecb2f6c4ef77c2d9bdcd3.svg?invert_in_darkmode&sanitize=true" align=middle width=86.3015175pt height=59.1786591pt/></p>``
 1. Multiply each element of `A` by 2
