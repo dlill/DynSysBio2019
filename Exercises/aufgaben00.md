@@ -2,12 +2,13 @@
 
 ## Exercise 1 - Installation
 
-* Go to [Github.com] and open an account
-
+* Go to [Github.com](https://www.github.com) and open an account
 * Install [JuliaPro](https://juliacomputing.com/products/juliapro.html) by following the steps below.
-1. Open a terminal and execute the following command. Pasting works with Ctrl+Shift+V
+
+1. Open a terminal and execute the following commands. Pasting works with Ctrl+Shift+V
 
     ```
+    cd
     git clone https://github.com/dlill/DynSysBio2019
     ```
 
@@ -21,15 +22,22 @@ run install.sh by navigating to the folder containing install.sh and run
     Follow the instructions given during the installation.
     Unfortunately, we cannot use Julia in another way on the Cip-pools, since this would require updating the Cip-pool computers.
 
+* Launch JuliaPro by executing the following command in a terminal
+
+    ```
+    ~/JuliaPro/JuliaPro-1.0.3.1/Launch_JuliaPro & exit
+    ```
+
+Have a quick look at `~/DynSysBio2019/Examples/FirstSteps.jl`
 
 ## Exercise 2 - Getting to know Julia
 
-In your home-folder, create a new folder `DynSysBio2019_programming` and create the file tutorial0.jl.
-Solve the following questions in the script.
-You can get inspiration from `DynSysBio2019/Examples/FirstSteps.jl`
+In your home-folder, create a new folder `~/DynSysBio2019_programming`.
+In Atom, create a new file "tutorial0.jl" and solve the following questions in this script.
 
 
-1. Create a 3x3 matrix A with entries 1:9
+1. Create a 3x3 matrix `A`
+    $\pmatrix{1&2&3\\4&5&6\\7&8&9}$
 1. Multiply each element of A by 2
     1. Solve this question twice, once with for loops, once with .
 1. Divide the elements element-wise by Matrix B.
