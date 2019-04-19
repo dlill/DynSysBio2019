@@ -37,7 +37,7 @@ In Atom, create a new file "tutorial0.jl" and solve the following questions in t
 
 
 1. Create a 3x3 matrix `A`
-    $\pmatrix{1&2&3\\4&5&6\\7&8&9}$
+    ``\pmatrix{1&2&3\\4&5&6\\7&8&9}``
 1. Multiply each element of A by 2
     1. Solve this question twice, once with for loops, once with .
 1. Divide the elements element-wise by Matrix B.
