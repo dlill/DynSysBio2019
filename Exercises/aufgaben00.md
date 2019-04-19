@@ -1,32 +1,25 @@
-# *Tutorial 0* {#tutorial-0 .subtitle}
+# Tutorial 0
 
 ## Exercise 1: Installation
 
-* Goals of the exercise:
-    * Install Julia and an IDE, basically a text-editor which provides functionality to execute and analyse Julia code.
-    * Learn basic command-line arguments
-    * Bonus: Create a github-account
+* Go to [Github.com] and open an account
 
 * Install [JuliaPro](https://juliacomputing.com/products/juliapro.html) by following the steps below.
-
 1. Open a terminal and execute the following command. Pasting works with Ctrl+Shift+V
 
-````julia
+    ```
+    git clone https://github.com/dlill/DynSysBio2019
+    ```
 
-git clone https://github.com/dlill/DynSysBio2019
-````
-
-
-
-
-2. Open a terminal and either copy-paste the commands in install.sh or
+1. Open a terminal and either copy-paste the commands in install.sh or
 run install.sh by navigating to the folder containing install.sh and run
 
-```
-./install.sh
-```
+    ```
+    ./install.sh
+    ```
 
-Follow the instructions given during the installation. Unfortunately, we cannot use Julia in another way on the Cip-pools, since this would require updating the Cip-pool computers.
+    Follow the instructions given during the installation.
+    Unfortunately, we cannot use Julia in another way on the Cip-pools, since this would require updating the Cip-pool computers.
 
 
 ## Exercise 2
