@@ -1,6 +1,6 @@
 # Tutorial 0
 
-## Exercise 1: Installation
+## Exercise 1 - Installation
 
 * Go to [Github.com] and open an account
 
@@ -22,14 +22,12 @@ run install.sh by navigating to the folder containing install.sh and run
     Unfortunately, we cannot use Julia in another way on the Cip-pools, since this would require updating the Cip-pool computers.
 
 
-## Exercise 2
+## Exercise 2 - Getting to know Julia
 
-* Goals of the exercise:
-    * Learn how to get help in Julia
-    * Learn basic Julia commands
-    * Usage and installation Julia-packages
+In your home-folder, create a new folder `DynSysBio2019_programming` and create the file tutorial0.jl.
+Solve the following questions in the script.
+You can get inspiration from `DynSysBio2019/Examples/FirstSteps.jl`
 
-In your home-folder create a new folder DynSysBio2019_programming and create the file tutorial0.jl. Solve the following questions in the script. You can get inspiration from Examples/FirstSteps.jl
 
 1. Create a 3x3 matrix A with entries 1:9
 1. Multiply each element of A by 2
