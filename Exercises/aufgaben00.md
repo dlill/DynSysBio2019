@@ -36,24 +36,22 @@ In your home-folder, create a new folder `~/DynSysBio2019_programming`.
 In Atom, create a new file "tutorial0.jl" and solve the following questions in this script.
 
 
-1. Create a 3x3 matrix `A`<img src="/Exercises/tex/e222bc34afa31710ee0b0359f52dfd2a.svg?invert_in_darkmode&sanitize=true" align=middle width=86.30151749999999pt height=67.39784699999998pt/>
-1. Multiply each element of A by 2
-    1. Solve this question twice, once with for loops, once with .
-1. Divide the elements element-wise by Matrix B.
+1. Create a 3x3 matrix <img src="/Exercises/tex/5b4f8bcfe91b62204611205be29f473f.svg?invert_in_darkmode&sanitize=true" align=middle width=120.54794564999999pt height=67.39784699999998pt/>
+1. Multiply each element of `A` by 2
+    1. Solve this question twice, once with for loops, once with vectorization
+1. Create a 3x3 matrix <img src="/Exercises/tex/a8f0d8389c6ebd93ef0e47b7ce074856.svg?invert_in_darkmode&sanitize=true" align=middle width=121.51255214999998pt height=67.39784699999998pt/>
+1. Divide `A` by `B` element-wise.
 1. Replace all entries A==5 by A = 0
-1. Create a 3x3 Identity Matrix by Matrix-multiplying A with its inverse.
-
-
+1. Create a 3x3 Identity Matrix by Matrix-multiplying `B` with its inverse.
+1. Create a vector `v` containing the numbers 1 to 10
 
 ## Exercise 3
 
-* Goals of the exercise:
-    * Learn simple Julia functions
-    * Write the Verhulst ODE as function which takes as input a *state* and *parameters*
-    * Own implementation of the Newton method to solve for roots.
+Given the ODE for the Verhulst model
 
-1. Write a function vh_ode(x, p) which evaluates the Verhulst-ODE
+<p align="center"><img src="/Exercises/tex/c55c49c2be5f67ef7b340d2eb1a55ef6.svg?invert_in_darkmode&sanitize=true" align=middle width=201.53053799999998pt height=39.452455349999994pt/></p>
 
+find the points <img src="/Exercises/tex/33717a96ef162d4ca3780ca7d161f7ad.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=18.666631500000015pt/> where <img src="/Exercises/tex/1382285b79c805c5cadab8b26d01d148.svg?invert_in_darkmode&sanitize=true" align=middle width=368.27161799999993pt height=47.67123240000001pt/>\left(f(x,\vec{p}), f'(x,\vec{p})\right)$
 
 1. Write a function newton_solve(x0, prec, p) with initial value x0 and precision prec. Stop the iterations when |xn+1−xn|< prec is reached.
 1. Test the newton steady-state solver with different parameter settings.
