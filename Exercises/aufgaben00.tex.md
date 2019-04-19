@@ -33,17 +33,19 @@ Have a quick look at `~/DynSysBio2019/Examples/FirstSteps.jl`
 ## Exercise 2 - Getting to know Julia
 
 In your home-folder, create a new folder `~/DynSysBio2019_programming`.
-In Atom, create a new file "tutorial0.jl" and solve the following questions in this script.
-
+In Atom, create a new file "~/DynSysBio2019_programming/tutorial0.jl" and solve the following questions in this script.
 
 1. Create a 3x3 matrix $ A = \begin{pmatrix}1&2&3\\4&5&6\\7&8&9\end{pmatrix}$
 1. Multiply each element of `A` by 2
-    1. Solve this question twice, once with for loops, once with vectorization
 1. Create a 3x3 matrix $ B = \begin{pmatrix}1&4&7\\2&5&8\\3&6&9\end{pmatrix}$
 1. Divide `A` by `B` element-wise.
 1. Replace all entries A==5 by A = 0
 1. Create a 3x3 Identity Matrix by Matrix-multiplying `B` with its inverse.
 1. Create a vector `v` containing the numbers 1 to 10
+    1. By using `[...]`
+    1. By using `collect`
+    1. By using a `for`-loop
+    1. By using a `while`-loop
 
 ## Exercise 3 - Newton method
 
@@ -55,7 +57,7 @@ $$
 
 find the points $\bar{x}$ where $\dot{x}=0 numerically.
 
-* Write a function `vh_ode(x, p)`` returning the vector $\left(f(x,\vec{p}), f'(x,\vec{p})\right)$
+* Write one function `vh_ode(x, p)`` and one function `vh_ode_jacobian(x,p)` returning $\f(x,\vec{p})$ and $f'(x,\vec{p})$, respectively.
 * Implement the newton method $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ in a function `newton_solve(x0, p; prec = 1e-8)` with initial value `x0`, parameter vector `p` and precision `prec`. Stop the iterations when |xn+1−xn|< prec is reached.
 * Test the newton steady-state solver with different starting values `x0` for different parameter sets.
     * Compare the results to the analytic solution
