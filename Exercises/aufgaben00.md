@@ -37,13 +37,7 @@ In Atom, create a new file "tutorial0.jl" and solve the following questions in t
 
 
 1. Create a 3x3 matrix `A`
-``\alpha`` <img src="/Exercises/tex/8217ed3c32a785f0b5aad4055f432ad8.svg?invert_in_darkmode&sanitize=true" align=middle width=10.16555099999999pt height=22.831056599999986pt/>
-
-$<img src="/Exercises/tex/811faa13eba25cc2006465941349e99a.svg?invert_in_darkmode&sanitize=true" align=middle width=49.79120189999999pt height=45.84475500000001pt/>ksjdfh$
-
-
-
-``left(<p align="center"><img src="/Exercises/tex/06bee61a8d87a92667e68c312e0016bc.svg?invert_in_darkmode&sanitize=true" align=middle width=8.21920935pt height=148.67579924999998pt/></p>\right)``
+<img src="/Exercises/tex/452dc9f1860e6b72b75acdf49610494b.svg?invert_in_darkmode&sanitize=true" align=middle width=51.46709699999999pt height=157.47932969999997pt/>
 1. Multiply each element of A by 2
     1. Solve this question twice, once with for loops, once with .
 1. Divide the elements element-wise by Matrix B.
