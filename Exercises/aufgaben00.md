@@ -36,7 +36,7 @@ In your home-folder, create a new folder `~/DynSysBio2019_programming`.
 In Atom, create a new file "tutorial0.jl" and solve the following questions in this script.
 
 
-1. Create a 3x3 matrix `A` $left(\begin{array}1&2&3\\4&5&6\\7&8&9\end{array}\right)$
+1. Create a 3x3 matrix `A` ``left(\begin{array}1&2&3\\4&5&6\\7&8&9\end{array}\right)``
 1. Multiply each element of A by 2
     1. Solve this question twice, once with for loops, once with .
 1. Divide the elements element-wise by Matrix B.
