@@ -36,8 +36,7 @@ In your home-folder, create a new folder `~/DynSysBio2019_programming`.
 In Atom, create a new file "tutorial0.jl" and solve the following questions in this script.
 
 
-1. Create a 3x3 matrix `A`
-<img src="/Exercises/tex/452dc9f1860e6b72b75acdf49610494b.svg?invert_in_darkmode&sanitize=true" align=middle width=51.46709699999999pt height=157.47932969999997pt/>
+1. Create a 3x3 matrix `A`<img src="/Exercises/tex/e222bc34afa31710ee0b0359f52dfd2a.svg?invert_in_darkmode&sanitize=true" align=middle width=86.30151749999999pt height=67.39784699999998pt/>
 1. Multiply each element of A by 2
     1. Solve this question twice, once with for loops, once with .
 1. Divide the elements element-wise by Matrix B.
