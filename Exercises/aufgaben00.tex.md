@@ -52,7 +52,7 @@ In Atom, create a new file "~/DynSysBio2019_programming/tutorial0.jl" and solve 
 Given the ODE for the Verhulst model
 
 $$
-\dot{x} = f(x,\vec{p}) = p_1 x \left( 1-\frac{x}{p2} \right)
+\dot{x} = f(x,\vec{p}) = p_1 x \left( 1-\frac{x}{p_2} \right)
 $$
 
 find the points $\bar{x}$ where $\dot{x}=0$, numerically.
@@ -60,7 +60,7 @@ find the points $\bar{x}$ where $\dot{x}=0$, numerically.
 * Write one function `vh_ode(x, p)` and one function `vh_ode_jacobian(x,p)` returning $f(x,\vec{p})$ and $f'(x,\vec{p})$, respectively.
 * Implement the newton method $x_{n+1} = x_n - \frac{f(x_n,\vec{p})}{f'(x_n,\vec{p})}$ in a function `newton(x0, p; prec = 1e-8)` with initial value `x0`, parameter vector `p` and precision `prec`.
     Stop the iterations when $|x_{n+1}−x_n| < prec$ is reached.
-* Test the newton steady-state solver with different starting values `x0` for different parameter sets.
+* Test the newton solver with different starting values $x0$ for different parameter sets $\vec{p}$.
     * Compare the results to the analytic solution
 
 [Illustration of Newton’s method](https://en.wikipedia.org/wiki/Newton's_method#/media/File:NewtonIteration_Ani.gif)
