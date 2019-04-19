@@ -45,7 +45,7 @@ In Atom, create a new file "tutorial0.jl" and solve the following questions in t
 1. Create a 3x3 Identity Matrix by Matrix-multiplying `B` with its inverse.
 1. Create a vector `v` containing the numbers 1 to 10
 
-## Exercise 3
+## Exercise 3 - Newton method
 
 Given the ODE for the Verhulst model
 
@@ -55,7 +55,9 @@ $$
 
 find the points $\bar{x}$ where $\dot{x}=0 numerically.
 
-1. Write a function `vh_ode(x, p)`` returning the vector $\left(f(x,\vec{p}), f'(x,\vec{p})\right)$
+* Write a function `vh_ode(x, p)`` returning the vector $\left(f(x,\vec{p}), f'(x,\vec{p})\right)$
+* Implement the newton method $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ in a function `newton_solve(x0, p; prec = 1e-8)` with initial value `x0`, parameter vector `p` and precision `prec`. Stop the iterations when |xn+1−xn|< prec is reached.
+* Test the newton steady-state solver with different starting values `x0` for different parameter sets.
+    * Compare the results to the analytic solution
 
-1. Write a function newton_solve(x0, prec, p) with initial value x0 and precision prec. Stop the iterations when |xn+1−xn|< prec is reached.
-1. Test the newton steady-state solver with different parameter settings.
+[Illustration of Newton’s method](https://en.wikipedia.org/wiki/Newton's_method#/media/File:NewtonIteration_Ani.gif)
