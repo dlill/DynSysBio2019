@@ -45,13 +45,14 @@ In Atom, create a new file "tutorial0.jl" and solve the following questions in t
 1. Create a 3x3 Identity Matrix by Matrix-multiplying `B` with its inverse.
 1. Create a vector `v` containing the numbers 1 to 10
 
-## Exercise 3
+## Exercise 3 - Newton method
 
 Given the ODE for the Verhulst model
 
 <p align="center"><img src="/Exercises/tex/c55c49c2be5f67ef7b340d2eb1a55ef6.svg?invert_in_darkmode&sanitize=true" align=middle width=201.53053799999998pt height=39.452455349999994pt/></p>
 
-find the points <img src="/Exercises/tex/33717a96ef162d4ca3780ca7d161f7ad.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=18.666631500000015pt/> where <img src="/Exercises/tex/1382285b79c805c5cadab8b26d01d148.svg?invert_in_darkmode&sanitize=true" align=middle width=368.27161799999993pt height=47.67123240000001pt/>\left(f(x,\vec{p}), f'(x,\vec{p})\right)$
+find the points <img src="/Exercises/tex/33717a96ef162d4ca3780ca7d161f7ad.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=18.666631500000015pt/> where <img src="/Exercises/tex/98408ea7f19f544894ab8a2a3eeed7aa.svg?invert_in_darkmode&sanitize=true" align=middle width=361.87890419999997pt height=47.67123240000001pt/>\left(f(x,\vec{p}), f'(x,\vec{p})\right)<img src="/Exercises/tex/e2afff0517108959c8fcb91cdc018b0a.svg?invert_in_darkmode&sanitize=true" align=middle width=220.79423684999998pt height=22.831056599999986pt/>x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$ in a function `newton_solve(x0, p; prec = 1e-8)` with initial value `x0`, parameter vector `p` and precision `prec`. Stop the iterations when |xn+1−xn|< prec is reached.
+* Test the newton steady-state solver with different starting values `x0` for different parameter sets.
+    * Compare the results to the analytic solution
 
-1. Write a function newton_solve(x0, prec, p) with initial value x0 and precision prec. Stop the iterations when |xn+1−xn|< prec is reached.
-1. Test the newton steady-state solver with different parameter settings.
+[Illustration of Newton’s method](https://en.wikipedia.org/wiki/Newton's_method#/media/File:NewtonIteration_Ani.gif)
