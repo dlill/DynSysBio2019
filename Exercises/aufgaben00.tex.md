@@ -6,7 +6,7 @@
 * Install [JuliaPro](https://juliacomputing.com/products/juliapro.html): Open a terminal and execute the following commands.
 
     ```
-    cd 
+    cd
     git clone https://github.com/dlill/DynSysBio2019
     cd DynSysBio2019
     ./install.sh
@@ -25,9 +25,9 @@
 ## Exercise 2 - Getting to know Julia
 
 Create a new folder `~/DynSysBio2019_programming`.
-Create a new file "~/DynSysBio2019_programming/tutorial0.jl" to solve the following questions in this script.
+Create a new file `~/DynSysBio2019_programming/tutorial0.jl` to solve the following questions in this script.
 
-1. Create a 3x3 matrix  ``A = \begin{pmatrix}1&2&3\\4&5&6\\7&8&9\end{pmatrix}``
+1. Create a 3x3 matrix  $ A = \begin{pmatrix}1&2&3\\4&5&6\\7&8&9\end{pmatrix} $
 1. Multiply each element of `A` by 2
 1. Create a 3x3 matrix $ B = \begin{pmatrix}1&4&7\\2&5&8\\3&6&9\end{pmatrix}$
 1. Divide `A` by `B` element-wise.
