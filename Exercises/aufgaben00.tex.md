@@ -1,3 +1,9 @@
+---
+title:  Dynamical Systems in Biology
+author: Janine Egert, Daniel Lill, Daniel Kaschek, Mirjam Fehling-Kaschek
+date: 23rd April 2019
+---
+
 # Tutorial 0
 
 ## Exercise 1 - Installation

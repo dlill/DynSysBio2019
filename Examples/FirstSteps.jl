@@ -2,6 +2,7 @@
 ### INSTALLING PACKAGES
 
 import Pkg
+Pkg.update()
 Pkg.add("Statistics")
 Pkg.add("Distributions")
 Pkg.add("Plots")

@@ -1,3 +1,9 @@
+---
+title:  Dynamical Systems in Biology
+author: Janine Egert, Daniel Lill, Daniel Kaschek, Mirjam Fehling-Kaschek
+date: 23rd April 2019
+---
+
 # Tutorial 0
 
 ## Exercise 1 - Installation
@@ -9,7 +15,7 @@
     cd
     git clone https://github.com/dlill/DynSysBio2019
     cd DynSysBio2019
-    ./install.sh
+    sh ./installJuliaPro.sh
     ```
 
     Follow the instructions given during the installation.
@@ -38,6 +44,7 @@ Create a new file `~/DynSysBio2019_programming/tutorial0.jl` to solve the follow
     1. By using `collect`
     1. By using a `for`-loop
     1. By using a `while`-loop
+
 
 ## Exercise 3 - Newton method
 
