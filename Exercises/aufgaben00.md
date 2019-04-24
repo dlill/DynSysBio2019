@@ -15,7 +15,7 @@ date: 23rd April 2019
     cd
     git clone https://github.com/dlill/DynSysBio2019
     cd DynSysBio2019
-    ./install.sh
+    sh ./installJuliaPro.sh
     ```
 
     Follow the instructions given during the installation.
@@ -48,12 +48,11 @@ Create a new file `~/DynSysBio2019_programming/tutorial0.jl` to solve the follow
 
 ## Exercise 3 - Data simulation
 Consider
-<p align="center"><img src="/Exercises/tex/5ac804ff0ed3a9428458e3a73b6c6dc6.svg?invert_in_darkmode&sanitize=true" align=middle width=149.41219425pt height=19.526994300000002pt/></p>
+<p align="center"><img src="/Exercises/tex/99a333763271bd4735c05b563dc4b3b8.svg?invert_in_darkmode&sanitize=true" align=middle width=114.64035495pt height=18.88772655pt/></p>
 on the interval t=[0,1] given (t_0 = 0.1, K = 4, k = 2). A data point is to be simulated by adding a normally distributed random number with mean 0 and standard deviation 0.05.
-
-1.  Simulate data for 100 timepoints in [0,1]
-1.  Generate a data vector y without noise, a data vector yn with noise and a data vector yerr=y.sigma for the errors.
-1.  Plot the datasets including data points, error bars and error bands.
+1. Simulate data for 100 timepoints in [0,1]
+1. Generate a data vector y without noise, a data vector yn with noise and a data vector yerr=y.*sigma for the errors.
+1. Plot the datasets including data points, error bars and error bands.
 
 
 ## Exercise 4 - Newton method
