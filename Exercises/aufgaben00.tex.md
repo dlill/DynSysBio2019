@@ -49,7 +49,7 @@ Create a new file `~/DynSysBio2019_programming/tutorial0.jl` to solve the follow
 ## Exercise 3 - Data simulation
 Consider
 $$
-f(x) = K \dot \text{e}^{-k \dot t}
+f(x) = K\cdot\text{e}^{-k\cdot t}
 $$
 on the interval t=[0,1] given (t_0 = 0.1, K = 4, k = 2). A data point is to be simulated by adding a normally distributed random number with mean 0 and standard deviation 0.05.
 1. Simulate data for 100 timepoints in [0,1]
