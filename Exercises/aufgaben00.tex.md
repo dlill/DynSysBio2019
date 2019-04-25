@@ -59,6 +59,7 @@ find the points $\bar{x}$ where $\dot{x}=0$, numerically.
 ### Solution
 
 ````julia
+
 # This is a comment, it is not evaluated when the code is executed.
 # Use comments to explain why you are doing what you are doing.
 
@@ -80,18 +81,6 @@ vh_ode(1, p = [2 2]) # Overwrite the default argument
 vh_ode(2) # Call at a different x-value
 # Question 3: why doesn't this line work? (related to Question 2)
 vh_ode(1, [2 2])
-````
-
-
-````
-Error: MethodError: no method matching vh_ode(::Int64, ::Array{Int64,2})
-Closest candidates are:
-  vh_ode(::Any; p) at none:9
-````
-
-
-
-````julia
 vh_ode_jacobian(1)
 vh_ode_jacobian(1, p = [2 2])
 vh_ode_jacobian(2)
@@ -128,7 +117,6 @@ newton(10, [1, 2], prec = 1)
 # Look at how long this vector (?length) becomes as you change prec from prec = 1e-12 to prec = 1,
 #   choose some intermediate precisions as well.
 ````
-
 
 
 
