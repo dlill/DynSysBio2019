@@ -64,7 +64,7 @@ find the points <img src="/Exercises/tex/33717a96ef162d4ca3780ca7d161f7ad.svg?in
 # Question 1: What does giving a default value such as p = [1 1] mean?
 # How does it affect the behaviour of the function when it is called?
 # Question 2: What does the semicolon ";" before p = [1 1] mean?
-#             Read https://docs.julialang.org/en/v1/manual/functions/index.html
+#             Read https://docs.julialang.org/en/v1/manual/functions/index.html#Optional-Arguments-1
 function vh_ode(x; p = [1 1])
     p[1]*x*(1-x/p[2])
 end
