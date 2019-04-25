@@ -1,9 +1,3 @@
----
-title:  Dynamical Systems in Biology
-author: Janine Egert, Daniel Lill, Daniel Kaschek, Mirjam Fehling-Kaschek
-date: 23rd April 2019
----
-
 # Tutorial 0
 
 ## Exercise 1 - Installation
@@ -33,9 +27,9 @@ date: 23rd April 2019
 Create a new folder `~/DynSysBio2019_programming`.
 Create a new file `~/DynSysBio2019_programming/tutorial0.jl` to solve the following questions in this script.
 
-1. Create a 3x3 matrix  $ A = \begin{pmatrix}1&2&3\\4&5&6\\7&8&9\end{pmatrix} $
+1. Create a 3x3 matrix  $$ A = \begin{pmatrix}1&2&3 \\\\ 4&5&6 \\\\ 7&8&9\end{pmatrix} $$
 1. Multiply each element of `A` by 2
-1. Create a 3x3 matrix $ B = \begin{pmatrix}1&4&7\\2&5&8\\3&6&9\end{pmatrix}$
+1. Create a 3x3 matrix $$ B = \begin{pmatrix}1&4&7\\\\2&5&8\\\\3&6&9\end{pmatrix}$$
 1. Divide `A` by `B` element-wise.
 1. Replace all entries A==5 by A = 0
 1. Create a 3x3 Identity Matrix by Matrix-multiplying `B` with its inverse.
@@ -65,12 +59,14 @@ find the points $\bar{x}$ where $\dot{x}=0$, numerically.
 ### Solution
 
 ````julia
+
 # This is a comment, it is not evaluated when the code is executed.
 # Use comments to explain why you are doing what you are doing.
 
 # Question 1: What does giving a default value such as p = [1 1] mean?
 # How does it affect the behaviour of the function when it is called?
 # Question 2: What does the semicolon ";" before p = [1 1] mean?
+#             Read https://docs.julialang.org/en/v1/manual/functions/index.html
 function vh_ode(x; p = [1 1])
     p[1]*x*(1-x/p[2])
 end
@@ -85,18 +81,6 @@ vh_ode(1, p = [2 2]) # Overwrite the default argument
 vh_ode(2) # Call at a different x-value
 # Question 3: why doesn't this line work? (related to Question 2)
 vh_ode(1, [2 2])
-````
-
-
-````
-Error: MethodError: no method matching vh_ode(::Int64, ::Array{Int64,2})
-Closest candidates are:
-  vh_ode(::Any; p) at none:8
-````
-
-
-
-````julia
 vh_ode_jacobian(1)
 vh_ode_jacobian(1, p = [2 2])
 vh_ode_jacobian(2)
@@ -133,7 +117,6 @@ newton(10, [1, 2], prec = 1)
 # Look at how long this vector (?length) becomes as you change prec from prec = 1e-12 to prec = 1,
 #   choose some intermediate precisions as well.
 ````
-
 
 
 
