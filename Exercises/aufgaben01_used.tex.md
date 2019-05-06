@@ -1,6 +1,6 @@
 # Tutorial 1
 
-Update the exercises-folder by running
+If you use git: Update the exercises-folder by running
 
 ```
 cd DynSysBio2019
