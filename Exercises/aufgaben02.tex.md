@@ -42,7 +42,8 @@ Install the packages `DifferentialEquations` and `CSV`.
 ## Exercise 1: SIR-Models - general exploration
 
 
-1. Implement the ODE of the SIR model as function `sir_ode`
+* Implement the ODE of the SIR model as function `sir_ode`
+
 $$
 \begin{aligned}
   \dot{S} & = - r  S  I \\
@@ -50,7 +51,9 @@ $$
   \dot{R} & = a I
 \end{aligned}
 $$
-1. Solve the sir_ode for the following parameters and initial conditions
+
+* Solve the sir_ode for the following parameters and initial conditions
+
 $$
 \begin{aligned}
 r & = 0.1 \\
@@ -60,10 +63,11 @@ S(t = 0) & = 450 \\
 N & = R + S + I = 1000 \\
 \end{aligned}
 $$
-1. Plot the solutions in configuration space
-1. Solve the ode for $r \in  {0.1, 0.15, 0.2, ... 0.5}$ and plot the solution in phase space. Interpret the plot.
-1. Repeat the previous step for $I(t = 0) = 1$
-1. Simulate the SIR model for $ I(0) = 50, R (0) = 0, S \in [100,1000]$ and $$ r = 0.1, a = 10$$. What difference would you expect for an epidemic in Manhattan (27.500 citizens per $km^2$) and Mongolia (1,7 citizens per $km^2$)?
+
+* Plot the solutions in configuration space
+* Solve the ode for $r \in  {0.1, 0.15, 0.2, ... 0.5}$ and plot the solution in phase space. Interpret the plot.
+* Repeat the previous step for $I(t = 0) = 1$
+* Simulate the SIR model for $ I(0) = 50, R (0) = 0, S \in [100,1000]$ and $$ r = 0.1, a = 10$$. What difference would you expect for an epidemic in Manhattan (27.500 citizens per $km^2$) and Mongolia (1,7 citizens per $km^2$)?
 
 ## Exercise 2: Schoolboys dataset
 
