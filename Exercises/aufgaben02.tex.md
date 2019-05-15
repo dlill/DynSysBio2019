@@ -65,8 +65,11 @@ N & = R + S + I = 1000 \\
 $$
 
 * Plot the solutions in configuration space.
-  Plotting documentation: [DifferentialEquations](http://docs.juliadiffeq.org/latest/basics/plot.html) and [Plots](http://docs.juliaplots.org/latest/)
+
+  Plotting documentation: [DifferentialEquations](http://docs.juliadiffeq.org/latest/basics/plot.html) and [Plots](http://docs.juliaplots.org/latest/).
+
   Helpful arguments for the plot function: `vars`, `seriestype`, `linestyle`
+  
 * Solve the ode for $r \in  {0.1, 0.15, 0.2, ... 0.5}$ and plot the solution in phase space. Interpret the plot.
 * Repeat the previous step for $I(t = 0) = 1$
 * Simulate the SIR model for $ I(0) = 50, R (0) = 0, S \in [100,1000]$ and $ r = 0.1, a = 10$. What difference would you expect for an epidemic in Manhattan (27.500 citizens per $km^2$) and Mongolia (1,7 citizens per $km^2$)?
