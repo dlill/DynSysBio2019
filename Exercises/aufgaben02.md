@@ -61,7 +61,7 @@ Install the packages `DifferentialEquations` and `CSV`.
 
 In this exercise, we are going to model the influenza outbreak at the english boarding school in 1978 with the standard SIR model.
 
-1. Find the data in Data/schoolboys.csv and plot the number of sick boys vs time
+1. Find the data in `Data/schoolboys.csv` and plot the number of sick boys vs time
 1. From the data, obtain suitable initial conditions `u0` for <img src="/Exercises/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/>, <img src="/Exercises/tex/21fd4e8eecd6bdf1a4d3d6bd1fb8d733.svg?invert_in_darkmode&sanitize=true" align=middle width=8.515988249999989pt height=22.465723500000017pt/>, <img src="/Exercises/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/> and define `tspan` accordingly.
 1. Define the parameter vector `p` with guessed parameters
 1. Solve the ODE problem and plot it together with data. Does it fit?
