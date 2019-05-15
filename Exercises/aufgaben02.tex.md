@@ -75,7 +75,7 @@ $$
 
 In this exercise, we are going to model the influenza outbreak at the english boarding school in 1978 with the standard SIR model.
 
-1. Find the data in Data/schoolboys.csv and plot the number of sick boys vs time
+1. Find the data in `Data/schoolboys.csv` and plot the number of sick boys vs time
 1. From the data, obtain suitable initial conditions `u0` for $S$, $I$, $R$ and define `tspan` accordingly.
 1. Define the parameter vector `p` with guessed parameters
 1. Solve the ODE problem and plot it together with data. Does it fit?
