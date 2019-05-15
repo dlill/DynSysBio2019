@@ -87,7 +87,8 @@ In this exercise, we are going to model the influenza outbreak at the english bo
 
 
 ## Cathedral exercise
-------------------
 
-What distinguishes our cathedral from all other German Gothic
-cathedrals?
+Close to the outside staircase leading to the top panorama platform there are seven huge figures.
+During the renovation around 1900 one of the figures was replaced by a figure of the Canon.
+What about this fact was so funny for a church representative from Konstanz when he visited
+the inauguration ceremony after the renovation?
