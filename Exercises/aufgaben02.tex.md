@@ -35,29 +35,49 @@ Then solve it with `solve()`
 solution = solve(ode_problem)
 ```
 
+## Exercise 0: Install needed packages
 
-## Exercise 1: SIR-Models
+Install the packages `DifferentialEquations` and `CSV`.
 
-[] Implement the ODE of the SIR model as function `sir_ode`
+## Exercise 1: SIR-Models - general exploration
 
+
+1. Implement the ODE of the SIR model as function `sir_ode`
 $$
 \begin{aligned}
   \dot{S} & = - r  S  I \\
   \dot{I} & =   r  S  I - a I \\
   \dot{R} & = a I
-
 \end{aligned}
 $$
+1. Solve the sir_ode for the following parameters and initial conditions
+$$
+\begin{aligned}
+r & = 0.1 \\
+a & = 50 \\
+R(t = 0) & = 0 \\
+S(t = 0) & = 450 \\
+N = R + S + I = 1000 \\
+\end{aligned}
+$$
+1. Plot the solutions in configuration space
+1. Solve the ode for $r \in  {0.1, 0.15, 0.2, ... 0.5} and plot the solution in phase space. Interpret the plot.
+1. Repeat the previous step for $I(t = 0) = 1$
+1. Simulate the SIR model for $$ I(0) = 50, R (0) = 0, S \in [100,1000]$$ and $$ r = 0.1, a = 10$$. What difference would you expect for an epidemic in Manhattan (27.500 citizens per $km^2$) and Mongolia (1,7 citizens per $km^2$)?
 
-[] Collect all necessary information to solve the following ODE describing the spread of an infectious disease in a population
+## Exercise 2: Schoolboys dataset
 
-* Use the parameters (from Christian, a little )
-* tune the parameters to make the model fit better
+In this exercise, we are going to model the influenza outbreak at the english boarding school in 1978 with the standard SIR model.
 
-[] install the needed packages
-[] Integrate the ODE with DifferentialEquations.jl
-[] Play around with it a little
-[] Fit the data to the data from the outbreaks paper: -> too ambitious? http://www.repidemicsconsortium.org/outbreaks/reference/influenza_england_1978_school.html
+1. Find the data in Data/schoolboys.csv and plot the number of sick boys vs time
+1. From the data, obtain suitable initial conditions `u0` for $S$, $I$, $R$ and define `tspan` accordingly.
+1. Define the parameter vector `p` with guessed parameters
+1. Solve the ODE problem and plot it together with data. Does it fit?
+1. Play around with the parameters to obtain a better model fit.
+    * From the Lecture script, p. 42: $$\rho = a/r ~200$$
+
+
+
 
 
 ## Cathedral exercise
