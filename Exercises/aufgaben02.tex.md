@@ -65,7 +65,7 @@ N & = R + S + I = 1000 \\
 $$
 
 * Plot the solutions in configuration space.
-  Plotting documentation: (DifferentialEquations)[http://docs.juliadiffeq.org/latest/basics/plot.html] and (Plots)[http://docs.juliaplots.org/latest/]
+  Plotting documentation: [DifferentialEquations](http://docs.juliadiffeq.org/latest/basics/plot.html) and [Plots](http://docs.juliaplots.org/latest/)
   Helpful arguments for the plot function: `vars`, `seriestype`, `linestyle`
 * Solve the ode for $r \in  {0.1, 0.15, 0.2, ... 0.5}$ and plot the solution in phase space. Interpret the plot.
 * Repeat the previous step for $I(t = 0) = 1$
