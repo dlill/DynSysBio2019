@@ -15,21 +15,40 @@ What it takes to solve an ODE
 
 Many algorithms for solving ODEs have been implemented in [DifferentialEquations.jl](http://docs.juliadiffeq.org/latest/index.html)
 
-To solve an ODE, first pose the complete ODE problem
-
+To solve an ODE with DifferentialEquations, first pose the complete ODE problem with `ODEProblem()`.
 ```
 function ode(u,p,t)
   ...
   return(du)
 end
+
+u0 = [1. ... ]
+p = [1.1 ...]
+t = (0.0 10.0) # don't forget the dots!
+
+ode_problem = ODEProblem(ode, u0, t, p)
 ```
 
 
+Then solve it with `solve()`
+```
+solution = solve(ode_problem)
+```
 
 
 ## Exercise 1: SIR-Models
 
-[o] Define the SIR ODE with the Macro-thing
+[] Implement the ODE of the SIR model as function `sir_ode`
+
+$$
+\begin{aligned}
+  \dot{S} & = - r  S  I \\
+  \dot{I} & =   r  S  I - a I \\
+  \dot{R} & = a I
+
+\end{aligned}
+$$
+
 [] Collect all necessary information to solve the following ODE describing the spread of an infectious disease in a population
 
 * Use the parameters (from Christian, a little )
