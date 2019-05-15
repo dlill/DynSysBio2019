@@ -5,19 +5,23 @@
 What it takes to solve an ODE
 
 * Problem
-    1. ODE
-    1. Boundary conditions
-    1. Parameters
-    1. Time range (for numerics)
+    1. ODE `function(u,p,t)`
+    1. Boundary conditions `u0`
+    1. Parameters `p`
+    1. Time range (for numerics) `(tstart, tend)`
 *  Solution
     1. Ansatz / algorithm
 
 
 Many algorithms for solving ODEs have been implemented in [DifferentialEquations.jl](http://docs.juliadiffeq.org/latest/index.html)
 
-To solve an ODE, first create a complete ODE
-```
+To solve an ODE, first pose the complete ODE problem
 
+```
+function ode(u,p,t)
+  ...
+  return(du)
+end
 ```
 
 
