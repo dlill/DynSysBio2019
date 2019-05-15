@@ -51,7 +51,7 @@ Install the packages `DifferentialEquations` and `CSV`.
 <p align="center"><img src="/Exercises/tex/2ceda145c1413594197ebc2f60d5e373.svg?invert_in_darkmode&sanitize=true" align=middle width=210.51310005pt height=110.59361775pt/></p>
 
 * Plot the solutions in configuration space.
-  Plotting documentation: (DifferentialEquations)[http://docs.juliadiffeq.org/latest/basics/plot.html] and (Plots)[http://docs.juliaplots.org/latest/]
+  Plotting documentation: [DifferentialEquations](http://docs.juliadiffeq.org/latest/basics/plot.html) and [Plots](http://docs.juliaplots.org/latest/)
   Helpful arguments for the plot function: `vars`, `seriestype`, `linestyle`
 * Solve the ode for <img src="/Exercises/tex/b855a403df9beca82ce842e87641d959.svg?invert_in_darkmode&sanitize=true" align=middle width=155.81819549999997pt height=21.18721440000001pt/> and plot the solution in phase space. Interpret the plot.
 * Repeat the previous step for <img src="/Exercises/tex/8d536b21a7ff9f8d0e2cc6ebf97de72b.svg?invert_in_darkmode&sanitize=true" align=middle width=87.51117704999999pt height=24.65753399999998pt/>
