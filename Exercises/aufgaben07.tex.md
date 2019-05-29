@@ -11,7 +11,7 @@ $$
 \begin{aligned} 
 S + E 
 {{k_{ 1} \atop \longrightarrow} \atop {\longleftarrow \atop k_{-1}}} 
-C \stackrel{k_{2}}{\longrightarrow} 
+C \stackrel{k_2}{\longrightarrow} 
 P + E. 
 \end{aligned} 
 $$
@@ -20,10 +20,10 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = k_{-1} \cdot c - k_{1} s \cdot e \\ 
-\dot{e} & = (k_{-1} + k_{2}) \cdot c - k_{1} \cdot s \cdot e \\ 
-\dot{c} & = k_{1} \cdot s \cdot e - (k_{-1} + k_{2}) \cdot c \\ 
-\dot{p} & = k_{2} \cdot c, 
+\dot{s} & = k_{-1} \cdot c - k_1 s \cdot e \\ 
+\dot{e} & = (k_{-1} + k_2) \cdot c - k_1 \cdot s \cdot e \\ 
+\dot{c} & = k_1 \cdot s \cdot e - (k_{-1} + k_2) \cdot c \\ 
+\dot{p} & = k_2 \cdot c, 
 \end{aligned}
 $$
 
@@ -31,8 +31,8 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = - \dot{p} = -\frac{k_{2} \mathrm{e}_{T}\cdot s}{\frac{k_{-1}}{k_1}} + s} \\ 
-c & = \frac{\mathrm{e}_{T} \cdot s}{\frac{k_{-1}}{k_{1}} + s}. 
+\dot{s} & = - \dot{p} = -\frac{k_2 e_{T}\cdot s}{\frac{k_{-1}}{k_1}} + s} \\ 
+c & = \frac{e_{T} \cdot s}{\frac{k_{-1}}{k_1} + s}. 
 \end{aligned} 
 $$
 
@@ -40,8 +40,8 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = - \dot{p} = - \frac{k_{2} \mathrm{e}_{T} \cdot s}{\frac{k_{-1}}{k_{1}} + s} \\ 
-c & = \frac{\mathrm{e}_{T} \cdot s}{K_{m} + s} \quad \text{mit} \quad K_{m} = \frac{k_{-1} + k_{2}}{k_{1}} 
+\dot{s} & = - \dot{p} = - \frac{k_2 e_{T} \cdot s}{K_m + s} \\ 
+c & = \frac{e_{T} \cdot s}{K_m + s} \quad \text{with} \quad K_m = \frac{k_{-1} + k_2}{k_1} 
 \end{aligned}
 $$
 
