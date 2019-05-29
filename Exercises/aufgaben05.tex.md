@@ -74,7 +74,7 @@ Exercise 2: Homework
 In this exercise, we wish to determine $Vmax$ and $K_m$ with the help of a *Lineweaver-Burk-Plot*.
 Those are described in the Script, p.107 and on https://en.wikipedia.org/wiki/Lineweaver%E2%80%93Burk_plot 
 
-!(https://upload.wikimedia.org/wikipedia/commons/7/70/Lineweaver-Burke_plot.svg]
+!(https://upload.wikimedia.org/wikipedia/commons/7/70/Lineweaver-Burke_plot.svg)
 
 
 
