@@ -49,7 +49,7 @@ $$
 $$ 
 \begin{aligned} 
 \dot{s} & = - \dot{p} = - \frac{k_2 e_{T} \cdot s}{K_m + s} \\ 
-c & = \frac{e_{T} \cdot s}{K_m + s} 
+c & = \frac{e_{T} \cdot s}{K_m + s} \\
 e &= e_T - c
 \quad \text{with} \quad K_m = \frac{k_{-1} + k_2}{k_1} 
 \end{aligned}
@@ -58,18 +58,26 @@ $$
 
 
 
+* To obtain time-courses of $c$ and $e$, you can either derive the algebraic solutions of $c(t)$ wrt $t$ and append that to the ode or write an additional function `ce(sol, p, t)` which takes the solution of the ode and returns the concentrations of $e(t)$ and $c(t)$
 
 
--   Simulate the three dynamic systems with parameters $(k_1 = 0.1)$, $(k_{-1} = 0.1)$, and $(k_2 = 0.1)$. 
-Let the initial concentrations be $(e(0) = 10)$, $(c(0) = 0)$, 
-and $(s(0) = 10, 20, ..., 100)$. 
 
--   Take a closer look at the initial time frame of the full system
-    implemented by mass-action kinetics. What do you observe?
-
--   Have a look at the dynamics of all implementations in phase space $(s)$ vs. $(c)$.
+1. Simulate the three dynamic systems with parameters $(k_1 = 0.1)$, $(k_{-1} = 0.1)$, and $(k_2 = 0.1)$. 
+    Let the initial concentrations be $(e(0) = 10)$, $(c(0) = p(0) = 0)$, and $(s(0) = 10, 20, 50, 75, 100, 500)$. 
+1. Take a closer look at the initial time frame of the full system implemented by mass-action kinetics. What do you observe?
+1. Have a look at the dynamics of all implementations in phase space $(s)$ vs. $(c)$.
 
 
+Exercise 2: Homework
+---------------------------
+
+![https://upload.wikimedia.org/wikipedia/commons/7/70/Lineweaver-Burke_plot.svg] \*
+
+1. Using the implementation of the mass-action-kinetics ODE, create a *Lineweaver-Burk-Plot* and determine Vmax and Km from it. Substeps:
+    * Simulate for different substrate concentrations
+    * Determine the time range where product formation is linear.
+    * In this time range, determine $V = \dot(p)$ and add it to the Lineweaver-Burk-Plot.
+    
 
 
 
@@ -81,3 +89,5 @@ On the historic depiction of the cathedral on a control box in front of
 the Hof-Apotheke, corner KaJo / Münsterstrasse, one can see that four
 steps lead to the main portal of the minster. Why is it only one today?
 
+
+\* Pro bug catcher at the English Wikipedia \[CC BY-SA 3.0 \http://creativecommons.org/licenses/by-sa/3.0/\)\]
