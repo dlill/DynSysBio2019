@@ -15,22 +15,24 @@ Implement the enzyme reaction
 
 -   using the steady-state approximation:
 
-<p align="center"><img src="/Exercises/tex/3cf2175e438bbda6671e69048171a6b5.svg?invert_in_darkmode&sanitize=true" align=middle width=170.64354285pt height=90.74722635pt/></p>
+<p align="center"><img src="/Exercises/tex/2ad00bf15ed38c11695f1224a4b8dd61.svg?invert_in_darkmode&sanitize=true" align=middle width=170.64354285pt height=113.59650719999999pt/></p>
 
 -   using the quasi-steady state approximation:
 
-<p align="center"><img src="/Exercises/tex/c467144166f8f94329c4859debeb62ae.svg?invert_in_darkmode&sanitize=true" align=middle width=265.22128215pt height=79.1309904pt/></p>
+<p align="center"><img src="/Exercises/tex/f6c7255d196b8a4307ac36fd05a8f305.svg?invert_in_darkmode&sanitize=true" align=middle width=399.98491664999995pt height=79.1309904pt/></p>
 
--   Simulate the three dynamic systems with parameters <img src="/Exercises/tex/13f4a5e304e36b9bef73a21d70eda5ab.svg?invert_in_darkmode&sanitize=true" align=middle width=71.64004319999998pt height=24.65753399999998pt/>, <img src="/Exercises/tex/17f7bc0a246c0007404a5346ae28b839.svg?invert_in_darkmode&sanitize=true" align=middle width=81.91404044999999pt height=24.65753399999998pt/>, and 
-    $(k_2 = 0.1)$. Let the initial concentrations be 
-    $(e(0) = 10)$, $(c(0) = 0)$, and 
-    $(s(0) = 10, 20, ..., 100)$. 
+-   Simulate the three dynamic systems with parameters <img src="/Exercises/tex/13f4a5e304e36b9bef73a21d70eda5ab.svg?invert_in_darkmode&sanitize=true" align=middle width=71.64004319999998pt height=24.65753399999998pt/>, <img src="/Exercises/tex/17f7bc0a246c0007404a5346ae28b839.svg?invert_in_darkmode&sanitize=true" align=middle width=81.91404044999999pt height=24.65753399999998pt/>, and <img src="/Exercises/tex/d4a645697d2f7de7f18500c8f4807ac4.svg?invert_in_darkmode&sanitize=true" align=middle width=71.64004319999998pt height=24.65753399999998pt/>. 
+Let the initial concentrations be <img src="/Exercises/tex/41985d8d2961f0dfcc045f024feb26ca.svg?invert_in_darkmode&sanitize=true" align=middle width=79.80026339999999pt height=24.65753399999998pt/>, <img src="/Exercises/tex/f73f55c4023713b093831c4f7116b881.svg?invert_in_darkmode&sanitize=true" align=middle width=71.04072029999999pt height=24.65753399999998pt/>, 
+and <img src="/Exercises/tex/aa5ea4eca4ca023578e49439d7758c3e.svg?invert_in_darkmode&sanitize=true" align=middle width=156.56397404999998pt height=24.65753399999998pt/>. 
 
 -   Take a closer look at the initial time frame of the full system
     implemented by mass-action kinetics. What do you observe?
 
--   Have a look at the dynamics of all implementations in phase space
-    $(s)$ vs. $(c)$.
+-   Have a look at the dynamics of all implementations in phase space <img src="/Exercises/tex/04c429e9e93ade50366c838485173e34.svg?invert_in_darkmode&sanitize=true" align=middle width=20.49091274999999pt height=24.65753399999998pt/> vs. <img src="/Exercises/tex/bd972c06c10dc1121597b5779d02eb90.svg?invert_in_darkmode&sanitize=true" align=middle width=19.89923759999999pt height=24.65753399999998pt/>.
+
+
+
+
 
 
 Cathedral exercise:
