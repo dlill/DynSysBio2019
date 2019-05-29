@@ -10,7 +10,7 @@ Implement the enzyme reaction
 $$
 \begin{aligned} 
 S + E 
-{{k_{ {\scriptscriptstyle}1} \atop \longrightarrow} \atop {\longleftarrow \atop k_{{\scriptscriptstyle}-1}}} 
+{{k_{ 1} \atop \longrightarrow} \atop {\longleftarrow \atop k_{-1}}} 
 C \stackrel{k_{2}}{\longrightarrow} 
 P + E. 
 \end{aligned} 
@@ -20,10 +20,10 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = k_{{\scriptscriptstyle}-1} \cdot c - k_{{\scriptscriptstyle}1} s \cdot e \\ 
-\dot{e} & = (k_{{\scriptscriptstyle}-1} + k_{{\scriptscriptstyle}2}) \cdot c - k_{{\scriptscriptstyle}1} \cdot s \cdot e \\ 
-\dot{c} & = k_{{\scriptscriptstyle}1} \cdot s \cdot e - (k_{{\scriptscriptstyle}-1} + k_{{\scriptscriptstyle}2}) \cdot c \\ 
-\dot{p} & = k_{{\scriptscriptstyle}2} \cdot c, 
+\dot{s} & = k_{-1} \cdot c - k_{1} s \cdot e \\ 
+\dot{e} & = (k_{-1} + k_{2}) \cdot c - k_{1} \cdot s \cdot e \\ 
+\dot{c} & = k_{1} \cdot s \cdot e - (k_{-1} + k_{2}) \cdot c \\ 
+\dot{p} & = k_{2} \cdot c, 
 \end{aligned}
 $$
 
@@ -31,8 +31,8 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = - \dot{p} = -\frac{k_{{\scriptscriptstyle}2} \mathrm{e}_{{\scriptscriptstyle}T}\cdot s}{\frac{k_{{\scriptscriptstyle}-1}}{k_{\scriptscriptstyle}1}} + s} \\ 
-c & = \frac{\mathrm{e}_{{\scriptscriptstyle}T} \cdot s}{\frac{k_{{\scriptscriptstyle}-1}}{k_{{\scriptscriptstyle}1}} + s}. 
+\dot{s} & = - \dot{p} = -\frac{k_{2} \mathrm{e}_{T}\cdot s}{\frac{k_{-1}}{k_1}} + s} \\ 
+c & = \frac{\mathrm{e}_{T} \cdot s}{\frac{k_{-1}}{k_{1}} + s}. 
 \end{aligned} 
 $$
 
@@ -40,19 +40,15 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = - \dot{p} = - \frac{k_{{\scriptscriptstyle}2} \mathrm{e}_{{\scriptscriptstyle}T} \cdot s}{\frac{k_{{\scriptscriptstyle}-1}}{k_{{\scriptscriptstyle}1}} + s} \\ 
-c & = \frac{\mathrm{e}_{{\scriptscriptstyle}T} \cdot s}{K_{{\scriptscriptstyle}m} + s} \quad \text{mit} \quad K_{{\scriptscriptstyle}m} = \frac{k_{{\scriptscriptstyle}-1} + k_{{\scriptscriptstyle}2}}{k_{{\scriptscriptstyle}1}} 
+\dot{s} & = - \dot{p} = - \frac{k_{2} \mathrm{e}_{T} \cdot s}{\frac{k_{-1}}{k_{1}} + s} \\ 
+c & = \frac{\mathrm{e}_{T} \cdot s}{K_{m} + s} \quad \text{mit} \quad K_{m} = \frac{k_{-1} + k_{2}}{k_{1}} 
 \end{aligned}
 $$
 
--   Simulate the three dynamic systems with parameters $(k_1 =
-    0.1)$, $(k_{-1} = 0.1)$, and $(k_2 =
-    0.1)$. Let the initial concentrations be $(e(0) =
-    10)$, $(c(0) = 0)$, and $(s(0) = 10, 20, ...,
-    100)$. *Hint: The return value of the ODE function is a
-    list, the first entry being the derivatives. The list may contain
-    more named elements, e.g., to return values of algebraic expressions
-    of the ODE states and parameters.*
+-   Simulate the three dynamic systems with parameters $(k_1 = 0.1)$, $(k_{-1} = 0.1)$, and 
+    $(k_2 = 0.1)$. Let the initial concentrations be 
+    $(e(0) = 10)$, $(c(0) = 0)$, and 
+    $(s(0) = 10, 20, ..., 100)$. 
 
 -   Take a closer look at the initial time frame of the full system
     implemented by mass-action kinetics. What do you observe?
