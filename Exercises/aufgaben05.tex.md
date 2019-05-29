@@ -63,6 +63,7 @@ $$
 
 
 1. Simulate the three dynamic systems with parameters $(k_1 = 0.1)$, $(k_{-1} = 0.1)$, and $(k_2 = 0.1)$. Let the initial concentrations be $(e(0) = 10)$, $(c(0) = p(0) = 0)$, and $(s(0) = 10, 20, 50, 75, 100, 500)$. 
+    Other parameters for the simulations are $e_T = e(0) = 10$ and `tspan = (0.0, 60.0).
 1. Take a closer look at the initial time frame of the full system implemented by mass-action kinetics. What do you observe?
 1. Have a look at the dynamics of all implementations in phase space $(s)$ vs. $(c)$.
 
