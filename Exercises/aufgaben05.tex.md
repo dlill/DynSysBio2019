@@ -36,7 +36,7 @@ $$
 
 $$ 
 \begin{aligned} 
-\dot{s} & = - \dot{p} = -\frac{k_2 e_{T}\cdot s}{\frac{k_{-1}}{k_1}} + s} \\ 
+\dot{s} & = - \dot{p} = -\frac{k_2 e_{T}\cdot s}{\frac{k_{-1}}{k_1} + s} } \\ 
 c & = \frac{e_{T} \cdot s}{\frac{k_{-1}}{k_1} + s} \\
 e &= e_T - c. 
 \end{aligned} 
