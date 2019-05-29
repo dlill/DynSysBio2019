@@ -27,33 +27,6 @@ $$
 \end{aligned}
 $$
 
-````julia
-
-using DifferentialEquations
-using Plots
-````
-
-
-````julia
-
-function ek_ma_ode!(du, u, p, t)
-    # p = [kon koff kcat]
-    du[1] = - p[1] * u[1] * u[2] + p[2] * u[3] #s
-    du[2] = - p[1] * u[1] * u[2] + (p[2] + p[3]) * u[3] #e
-    du[3] =   p[1] * u[1] * u[2] - (p[2] + p[3]) * u[3] #c
-    du[4] = p[3]*u[3] #p
-    return(du)
-end
-
-u0_ma = [10. 10 0 0]'
-p = ones(3)  * 0.1
-du = zeros(4)
-tspan = (0.,60.)
-ek_ma_ode!(du, u0_ma, p, 1)
-ek_ma_prob = ODEProblem(ek_ma_ode!, u0_ma, tspan, p)
-ek_ma_sol = solve(ek_ma_prob)
-plot(ek_ma_sol)
-````
 
 
 
@@ -69,26 +42,6 @@ e &= e_T - c.
 \end{aligned} 
 $$
 
-````julia
-
-function ek_ss_ode!(du, u, p, t)
-    # p = [kon koff kcat eT]
-    # u = [s p]
-    du[1] =  - p[3] * p[4] * u[1] / (p[2]/p[1] + u[1])
-    du[2] =  + p[3] * p[4] * u[1] / (p[2]/p[1] + u[1])
-    return(du)
-end
-
-u0_ss = [10. 0]'
-p = push!(ones(3)  * 0.1, 10)
-du_ss = zeros(2)
-tspan = (0.,60.)
-ek_ss_ode!(du_ss, u0_ss, p, 1)
-ek_ss_prob = ODEProblem(ek_ss_ode!, u0_ss, tspan, p)
-ek_ss_sol = solve(ek_ss_prob)
-plot(ek_ss_sol)
-````
-
 
 
 -   using the quasi-steady state approximation:
@@ -101,36 +54,6 @@ e &= e_T - c
 \quad \text{with} \quad K_m = \frac{k_{-1} + k_2}{k_1} 
 \end{aligned}
 $$
-
-````julia
-
-function ek_qs_ode!(du, u, p, t)
-    # p = [kon koff kcat eT]
-    # u = [s p]
-    du[1] =  - p[3] * p[4] * u[1] / ((p[2]+p[3])/p[1] + u[1])
-    du[2] =  + p[3] * p[4] * u[1] / ((p[2]+p[3])/p[1] + u[1])
-    return(du)
-end
-
-u0_qs = [10. 0]'
-p = push!(ones(3)  * 0.1, 10)
-du_qs = zeros(2)
-tspan = (0.,60.)
-ek_qs_ode!(du_qs, u0_qs, p, 1)
-ek_qs_prob = ODEProblem(ek_qs_ode!, u0_qs, tspan, p)
-ek_qs_sol = solve(ek_qs_prob)
-plot(ek_qs_sol)
-
-function ce_qs(sp_sol,p,t)
-    c = zeros(length(t))
-    e = zeros(length(t))
-    @. c = p[4] * (sp_sol(t, idxs = 1)) / ((p[2]+p[3])/p[1] + sp_sol(t, idxs = 1))
-    @. e = p[4] - c
-    [t c e]
-end
-complexes = ce_qs(ek_qs_sol, p, collect(0:0.1:60))
-plot!(complexes[:,1], complexes[:,2:3])
-````
 
 
 
