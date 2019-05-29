@@ -20,7 +20,7 @@ Implement the enzyme reaction
 
 -   using the steady-state approximation:
 
-<p align="center"><img src="/Exercises/tex/2ad00bf15ed38c11695f1224a4b8dd61.svg?invert_in_darkmode&sanitize=true" align=middle width=170.64354285pt height=113.59650719999999pt/></p>
+<p align="center"><img src="/Exercises/tex/4c6e1bf5c70a6ba9f53c2e6ed3af031b.svg?invert_in_darkmode&sanitize=true" align=middle width=141.4047096pt height=113.59650719999999pt/></p>
 
 
 
