@@ -44,12 +44,17 @@ Implement the enzyme reaction
 Exercise 2: Homework
 ---------------------------
 
+In this exercise, we wish to determine <img src="/Exercises/tex/1651e099d41a2ec1ecfb1a213c0b778f.svg?invert_in_darkmode&sanitize=true" align=middle width=45.759273449999995pt height=22.465723500000017pt/> and <img src="/Exercises/tex/130852624aca82645bbc10d3d44396c2.svg?invert_in_darkmode&sanitize=true" align=middle width=25.62606254999999pt height=22.465723500000017pt/> with the help of a *Lineweaver-Burk-Plot*.
+Those are described in the Script, p.107 and on https://en.wikipedia.org/wiki/Lineweaver%E2%80%93Burk_plot 
+
 ![https://upload.wikimedia.org/wikipedia/commons/7/70/Lineweaver-Burke_plot.svg] \*
 
-1. Using the implementation of the mass-action-kinetics ODE, create a *Lineweaver-Burk-Plot* and determine Vmax and Km from it. Substeps:
-    * Simulate for different substrate concentrations
-    * Determine the time range where product formation is linear.
-    * In this time range, determine $V = \dot(p)$ and add it to the Lineweaver-Burk-Plot.
+
+
+1. Using the implementation of the mass-action-kinetics ODE, create a Lineweaver-Burk-Plot and determine Vmax and Km from it. Substeps:
+    * Simulate the mass-action-kinetics ODE  with the parameters from above and for $s(0) = 100$.
+    * Plot $frac{1}{V} = \frac{1}{\dot{p}}$ vs $\frac{1}{s}$ 
+    * Determine $Vmax$ and $K_m$ from the plot.
     
 
 
