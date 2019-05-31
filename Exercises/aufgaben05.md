@@ -13,7 +13,35 @@ Implement the enzyme reaction
 
 <p align="center"><img src="/Exercises/tex/f18680f89433340961ebba8cf3aa58dd.svg?invert_in_darkmode&sanitize=true" align=middle width=199.3163667pt height=88.58448225pt/></p>
 
+````julia
+using DifferentialEquations
+using Plots
+````
 
+
+
+````julia
+function ma_ode!(du, u, p, t)
+    # p = [kon koff kcat]
+    du[1] = - p[1] * u[1] * u[2] + p[2] * u[3] #s
+    du[2] = - p[1] * u[1] * u[2] + (p[2] + p[3]) * u[3] #e
+    du[3] =   p[1] * u[1] * u[2] - (p[2] + p[3]) * u[3] #c
+    du[4] = p[3]*u[3] #p
+    return du
+end
+
+u0_ma = [10. 10 0 0]'
+p = ones(3)  * 0.1
+du = zeros(4)
+tspan = (0.,60.)
+ma_ode!(du, u0_ma, p, 1)
+ma_prob = ODEProblem(ma_ode!, u0_ma, tspan, p)
+ma_sol = solve(ma_prob)
+plot(ma_sol)
+````
+
+
+![](figures/aufgaben05_solution_2_1.png)
 
 
 
@@ -22,6 +50,51 @@ Implement the enzyme reaction
 
 <p align="center"><img src="/Exercises/tex/4c6e1bf5c70a6ba9f53c2e6ed3af031b.svg?invert_in_darkmode&sanitize=true" align=middle width=141.4047096pt height=113.59650719999999pt/></p>
 
+````julia
+# ODEs of c and e are obtained via the chain rule:
+# c = eT * s / (koff/kon + s) 
+# dot{c} = \partial c/partial s * ds/dt (all other partial derivs are zero)
+function ssa_ode!(du, u, p, t)
+    kon,koff, kcat, eT = p
+    s,e,c,p = u
+    du[1] =  - koff * eT * s / (koff/kon + s) #s
+    du[4] =  -du[1] #p
+    # c = eT * s / (koff/kon + s)
+    # dcdt = dcds dsdt
+    du[3] = (eT * (koff/kon + s) - eT * s) / (koff/kon + s)^2 * du[1] #c
+    du[2] = -du[3] #e
+    du
+end
+
+# eT becomes the fourth parameter
+p = [0.1 0.1 0.1 10]
+s0 = 10
+
+# Initial conditions for c and e by plugging the initial condition for s into c(s).
+c0 = p[4]*s0/(p[2]/p[1] + s0) 
+u0_ssa = [s0 p[4]-c0 c0 0]
+du_ssa = zeros(4)
+
+tspan = (0.,60.)
+ssa_ode!(du_ssa, u0_ssa, p, 1)
+ssa_prob = ODEProblem(ssa_ode!, u0_ssa, tspan, p)
+ssa_sol = solve(ssa_prob)
+plot(ssa_sol)
+
+# One could also just have taken the solution to calculate c and e from that.
+function ce_ssa(sol_ssa,p,t)
+    c = zeros(length(t))
+    e = zeros(length(t))
+    @. c = p[4] * (sol_ssa(t, idxs = 1)) / ((p[2])/p[1] + sol_ssa(t, idxs = 1))
+    @. e = p[4] - c
+    [t c e]
+end
+complexes = ce_ssa(ssa_sol, p, collect(0:0.1:60))
+plot!(complexes[:,1], complexes[:,2:3], linewidth = 10)
+````
+
+
+![](figures/aufgaben05_solution_3_1.png)
 
 
 
@@ -31,51 +104,17 @@ Implement the enzyme reaction
 
 ````julia
 mysol = ma_sol(collect(0:0.1:60));
-````
-
-
-````
-Error: UndefVarError: ma_sol not defined
-````
-
-
-
-````julia
 plot(mysol.t, 
     mysol[1,:].+mysol[3,:].+mysol[4,:], 
     ylims = (9.9,10.1), 
     yticks = 9.9:0.1:10.1)
-````
-
-
-````
-Error: UndefVarError: mysol not defined
-````
-
-
-
-````julia
 
 mysol = ssa_sol(collect(0:0.1:60));
-````
-
-
-````
-Error: UndefVarError: ssa_sol not defined
-````
-
-
-
-````julia
 plot(mysol.t, mysol[1,:].+mysol[3,:].+mysol[4,:])
 ````
 
 
-````
-Error: UndefVarError: mysol not defined
-````
-
-
+![](figures/aufgaben05_solution_4_1.png)
 
 
 
@@ -83,6 +122,45 @@ Error: UndefVarError: mysol not defined
 
 <p align="center"><img src="/Exercises/tex/d187460ee5a9dcabd2f36bf6724364cf.svg?invert_in_darkmode&sanitize=true" align=middle width=252.24619365pt height=117.87457769999999pt/></p>
 
+````julia
+function qsa_ode!(du, u, p, t)
+    kon,koff, kcat, eT = p
+    s,e,c,p = u
+    du[1] =  - koff * eT * s / ((koff+kcat)/kon + s) #s
+    du[4] =  -du[1] #p
+    # c = eT * s / ((koff+kcat)/kon + s)
+    # dcdt = dcds dsdt
+    du[3] = (eT * ((koff+kcat)/kon + s) - eT * s) / ((koff+kcat)/kon + s)^2 * du[1] #c
+    du[2] = -du[3] #e
+    du
+end
+
+p = [0.1 0.1 0.1 10]
+s0 = 10
+# Initial conditions for c and e by plugging the initial condition for s into c(s).
+c0 = p[4]*s0/((p[2]+p[3])/p[1] + s0) 
+u0_qsa = [s0 p[4]-c0 c0 0]
+du_qsa = zeros(4)
+
+tspan = (0.,60.)
+qsa_ode!(du_qsa, u0_qsa, p, 1)
+qsa_prob = ODEProblem(qsa_ode!, u0_qsa, tspan, p)
+qsa_sol = solve(qsa_prob)
+plot(qsa_sol)
+
+function ce_qsa(sp_sol,p,t)
+    c = zeros(length(t))
+    e = zeros(length(t))
+    @. c = p[4] * (sp_sol(t, idxs = 1)) / ((p[2]+p[3])/p[1] + sp_sol(t, idxs = 1))
+    @. e = p[4] - c
+    [t c e]
+end
+complexes = ce_qsa(qsa_sol, p, collect(0:0.1:60))
+plot!(complexes[:,1], complexes[:,2:3], linewidth = 10)
+````
+
+
+![](figures/aufgaben05_solution_5_1.png)
 
 
 
@@ -119,16 +197,6 @@ for (s0,i) in zip(s0_values, 1:length(s0_values))
     qsa_sols[i] = solve(qsa_prob)
 
 end
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 
 # doesnt yet work...
 # myplot = plot(layout = 4)
@@ -154,16 +222,6 @@ Error: UndefVarError: ODEProblem not defined
 # substrate: you can see that the initial conditions don't really match since I didn't take into account that at the beginning, some of the substrate is sequestered into the complex.
 # However, the linear decrease is well matched for high substrate concentrations.
 plot()
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 for (ma, ssa,qsa) in zip(ma_sols, ssa_sols, qsa_sols)
     display(plot!(ma,  vars = 1))
     display(plot!(ssa, vars = 1, linestyle = :dot))
@@ -172,26 +230,26 @@ end
 ````
 
 
-````
-Error: UndefRefError: access to undefined reference
-````
-
-
+![](figures/aufgaben05_solution_6_1.png)
+![](figures/aufgaben05_solution_6_2.png)
+![](figures/aufgaben05_solution_6_3.png)
+![](figures/aufgaben05_solution_6_4.png)
+![](figures/aufgaben05_solution_6_5.png)
+![](figures/aufgaben05_solution_6_6.png)
+![](figures/aufgaben05_solution_6_7.png)
+![](figures/aufgaben05_solution_6_8.png)
+![](figures/aufgaben05_solution_6_9.png)
+![](figures/aufgaben05_solution_6_10.png)
+![](figures/aufgaben05_solution_6_11.png)
+![](figures/aufgaben05_solution_6_12.png)
+![](figures/aufgaben05_solution_6_13.png)
+![](figures/aufgaben05_solution_6_14.png)
+![](figures/aufgaben05_solution_6_15.png)
 
 ````julia
 
 # complex: The approximations assume that complexes are created instantaneously whereas it has to be created first in the more realistic (for the initial phase) mass-action setting.
 plot()
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 for (ma, ssa,qsa) in zip(ma_sols, ssa_sols, qsa_sols)
     display(plot!(ma,  vars = 3, color = :red))
     display(plot!(ssa, vars = 3, linestyle = :dot, color = :green))
@@ -200,11 +258,21 @@ end
 ````
 
 
-````
-Error: UndefRefError: access to undefined reference
-````
-
-
+![](figures/aufgaben05_solution_6_16.png)
+![](figures/aufgaben05_solution_6_17.png)
+![](figures/aufgaben05_solution_6_18.png)
+![](figures/aufgaben05_solution_6_19.png)
+![](figures/aufgaben05_solution_6_20.png)
+![](figures/aufgaben05_solution_6_21.png)
+![](figures/aufgaben05_solution_6_22.png)
+![](figures/aufgaben05_solution_6_23.png)
+![](figures/aufgaben05_solution_6_24.png)
+![](figures/aufgaben05_solution_6_25.png)
+![](figures/aufgaben05_solution_6_26.png)
+![](figures/aufgaben05_solution_6_27.png)
+![](figures/aufgaben05_solution_6_28.png)
+![](figures/aufgaben05_solution_6_29.png)
+![](figures/aufgaben05_solution_6_30.png)
 
 
 1. Take a closer look at the initial time frame of the full system implemented by mass-action kinetics. What do you observe?
@@ -216,11 +284,7 @@ plot(ma_sol, tspan = (0.,5.))
 ````
 
 
-````
-Error: UndefVarError: plot not defined
-````
-
-
+![](figures/aufgaben05_solution_7_1.png)
 
 
 1. Have a look at the dynamics of all implementations in phase space <img src="/Exercises/tex/04c429e9e93ade50366c838485173e34.svg?invert_in_darkmode&sanitize=true" align=middle width=20.49091274999999pt height=24.65753399999998pt/> vs. <img src="/Exercises/tex/bd972c06c10dc1121597b5779d02eb90.svg?invert_in_darkmode&sanitize=true" align=middle width=19.89923759999999pt height=24.65753399999998pt/>.
@@ -228,36 +292,12 @@ Error: UndefVarError: plot not defined
 ````julia
 # Again we observe that the approximations already start with ready-made complexes
 plot(ma_sol, vars = (1,3), color = :red)
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 plot!(ssa_sol, vars = (1,3), color = :green)
-````
-
-
-````
-Error: UndefVarError: plot! not defined
-````
-
-
-
-````julia
 plot!(qsa_sol, vars = (1,3), color = :blue)
 ````
 
 
-````
-Error: UndefVarError: plot! not defined
-````
-
-
+![](figures/aufgaben05_solution_8_1.png)
 
 
 
