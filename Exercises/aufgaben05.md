@@ -79,7 +79,13 @@ tspan = (0.,60.)
 ssa_ode!(du_ssa, u0_ssa, p, 1)
 ssa_prob = ODEProblem(ssa_ode!, u0_ssa, tspan, p)
 ssa_sol = solve(ssa_prob)
-plot(ssa_sol)
+display(plot(ssa_sol))
+````
+
+
+![](figures/aufgaben05_solution_3_1.png)
+
+````julia
 
 # One could also just have taken the solution to calculate c and e from that.
 function ce_ssa(sol_ssa,p,t)
@@ -94,7 +100,7 @@ plot!(complexes[:,1], complexes[:,2:3], linewidth = 10)
 ````
 
 
-![](figures/aufgaben05_solution_3_1.png)
+![](figures/aufgaben05_solution_3_2.png)
 
 
 
@@ -104,17 +110,23 @@ plot!(complexes[:,1], complexes[:,2:3], linewidth = 10)
 
 ````julia
 mysol = ma_sol(collect(0:0.1:60));
-plot(mysol.t, 
+display(plot(mysol.t, 
     mysol[1,:].+mysol[3,:].+mysol[4,:], 
     ylims = (9.9,10.1), 
-    yticks = 9.9:0.1:10.1)
-
-mysol = ssa_sol(collect(0:0.1:60));
-plot(mysol.t, mysol[1,:].+mysol[3,:].+mysol[4,:])
+    yticks = 9.9:0.1:10.1))
 ````
 
 
 ![](figures/aufgaben05_solution_4_1.png)
+
+````julia
+
+mysol = ssa_sol(collect(0:0.1:60));
+display(plot(mysol.t, mysol[1,:].+mysol[3,:].+mysol[4,:]))
+````
+
+
+![](figures/aufgaben05_solution_4_2.png)
 
 
 
@@ -147,16 +159,6 @@ qsa_ode!(du_qsa, u0_qsa, p, 1)
 qsa_prob = ODEProblem(qsa_ode!, u0_qsa, tspan, p)
 qsa_sol = solve(qsa_prob)
 plot(qsa_sol)
-
-function ce_qsa(sp_sol,p,t)
-    c = zeros(length(t))
-    e = zeros(length(t))
-    @. c = p[4] * (sp_sol(t, idxs = 1)) / ((p[2]+p[3])/p[1] + sp_sol(t, idxs = 1))
-    @. e = p[4] - c
-    [t c e]
-end
-complexes = ce_qsa(qsa_sol, p, collect(0:0.1:60))
-plot!(complexes[:,1], complexes[:,2:3], linewidth = 10)
 ````
 
 
@@ -223,56 +225,30 @@ end
 # However, the linear decrease is well matched for high substrate concentrations.
 plot()
 for (ma, ssa,qsa) in zip(ma_sols, ssa_sols, qsa_sols)
-    display(plot!(ma,  vars = 1))
-    display(plot!(ssa, vars = 1, linestyle = :dot))
-    display(plot!(qsa, vars = 1, linestyle = :dash))
+    plot!(ma,  vars = 1)
+    plot!(ssa, vars = 1, linestyle = :dot)
+    plot!(qsa, vars = 1, linestyle = :dash)
 end
+display(plot!())
 ````
 
 
 ![](figures/aufgaben05_solution_6_1.png)
-![](figures/aufgaben05_solution_6_2.png)
-![](figures/aufgaben05_solution_6_3.png)
-![](figures/aufgaben05_solution_6_4.png)
-![](figures/aufgaben05_solution_6_5.png)
-![](figures/aufgaben05_solution_6_6.png)
-![](figures/aufgaben05_solution_6_7.png)
-![](figures/aufgaben05_solution_6_8.png)
-![](figures/aufgaben05_solution_6_9.png)
-![](figures/aufgaben05_solution_6_10.png)
-![](figures/aufgaben05_solution_6_11.png)
-![](figures/aufgaben05_solution_6_12.png)
-![](figures/aufgaben05_solution_6_13.png)
-![](figures/aufgaben05_solution_6_14.png)
-![](figures/aufgaben05_solution_6_15.png)
 
 ````julia
 
 # complex: The approximations assume that complexes are created instantaneously whereas it has to be created first in the more realistic (for the initial phase) mass-action setting.
 plot()
 for (ma, ssa,qsa) in zip(ma_sols, ssa_sols, qsa_sols)
-    display(plot!(ma,  vars = 3, color = :red))
-    display(plot!(ssa, vars = 3, linestyle = :dot, color = :green))
-    display(plot!(qsa, vars = 3, linestyle = :dash, color = :blue))
+    plot!(ma,  vars = 3, color = :red)
+    plot!(ssa, vars = 3, linestyle = :dot, color = :green)
+    plot!(qsa, vars = 3, linestyle = :dash, color = :blue)
 end
+display(plot!())
 ````
 
 
-![](figures/aufgaben05_solution_6_16.png)
-![](figures/aufgaben05_solution_6_17.png)
-![](figures/aufgaben05_solution_6_18.png)
-![](figures/aufgaben05_solution_6_19.png)
-![](figures/aufgaben05_solution_6_20.png)
-![](figures/aufgaben05_solution_6_21.png)
-![](figures/aufgaben05_solution_6_22.png)
-![](figures/aufgaben05_solution_6_23.png)
-![](figures/aufgaben05_solution_6_24.png)
-![](figures/aufgaben05_solution_6_25.png)
-![](figures/aufgaben05_solution_6_26.png)
-![](figures/aufgaben05_solution_6_27.png)
-![](figures/aufgaben05_solution_6_28.png)
-![](figures/aufgaben05_solution_6_29.png)
-![](figures/aufgaben05_solution_6_30.png)
+![](figures/aufgaben05_solution_6_2.png)
 
 
 1. Take a closer look at the initial time frame of the full system implemented by mass-action kinetics. What do you observe?
@@ -291,7 +267,7 @@ plot(ma_sol, tspan = (0.,5.))
 
 ````julia
 # Again we observe that the approximations already start with ready-made complexes
-plot(ma_sol, vars = (1,3), color = :red)
+plot(ma_sol, vars = (1,3), color = :red, xlabel = "e", ylabel = "c")
 plot!(ssa_sol, vars = (1,3), color = :green)
 plot!(qsa_sol, vars = (1,3), color = :blue)
 ````
@@ -317,6 +293,8 @@ Those are described in the Script, p.107 and on https://en.wikipedia.org/wiki/Li
     * Plot $frac{1}{V} = \frac{1}{\dot{p}}$ vs $\frac{1}{s}$ 
     * Determine $Vmax$ and $K_m$ from the plot.
     
+
+
 
 
 
