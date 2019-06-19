@@ -83,6 +83,11 @@ $$
 
 -   You can copy the following code:
 
+````julia
+using DifferentialEquations, Plots
+````
+
+
 
 ````julia
 
@@ -113,6 +118,64 @@ plot(sol)
 
 -   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux $ J = \dot{P}|_{\text{steady state}} $ by simulating the system for long time periods.
 
+````julia
+prb = ODEProblem(enzyme_ode!, u0, (0.,10000.), p)
+````
+
+
+````
+Error: UndefVarError: enzyme_ode! not defined
+````
+
+
+
+````julia
+sol = solve(prb)
+````
+
+
+````
+Error: UndefVarError: prb not defined
+````
+
+
+
+````julia
+
+
+print(last(sol))
+````
+
+
+````
+Error: UndefVarError: sol not defined
+````
+
+
+
+````julia
+
+plot(sol)
+````
+
+
+````
+Error: UndefVarError: sol not defined
+````
+
+
+
+````julia
+
+enzyme_ode!(zeros(4), last(sol), p, 0)
+````
+
+
+````
+Error: UndefVarError: sol not defined
+````
+
+
 
 
 
@@ -120,10 +183,62 @@ plot(sol)
   calculate the steady state concentrations of the enzymes $S_1$, $S_2$ and $S_3$ without simulating the system
   How does this work i.e. what's the math behind it (think back to the very first tutorial)?
 
+````julia
+using ParameterizedFunctions
+ei = @ode_def begin
+    dS1 = v0*S /(K0 + S ) - v1*S1/(K1 + S1)
+    dS2 = v1*S1/(K1 + S1) - v2*S2/(K2 + S2)
+    dS3 = v2*S2/(K2 + S2) - v3*S3/(K3 + S3) 
+end S v0  v1 v2  v3 K0 K1 K2 K3
+
+p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
+
+ei(zeros(3), p, 1.)
+steady_prob = SteadyStateProblem(ei, zeros(3), p)
+steady_sol = solve(steady_prob)
+````
+
+
+````
+u: 3-element Array{Float64,1}:
+ 0.1               
+ 9.999999999721467 
+ 0.0925925925925926
+````
+
+
 
 
 
 - Use the steady-state solution of the substrates to calculate the flux
+
+````julia
+enzyme_ode!(zeros(4), [steady_sol.u... 0], p, 0.1)
+````
+
+
+````
+Error: UndefVarError: enzyme_ode! not defined
+````
+
+
+
+````julia
+
+using DiffEqBiological
+rn = @reaction_network begin
+    mm(S, v0, K0), 0 --> S1
+    v1/(K1+S1), S1 --> S2
+    v2/(K2+S2), S2 --> S3
+    v3/(K3+S3), S3 --> P
+end S v0  v1 v2  v3 K0 K1 K2 K3
+````
+
+
+````
+(::Main.WeaveSandBox33.reaction_network) (generic function with 2 methods)
+````
+
 
 
 
@@ -134,10 +249,115 @@ plot(sol)
 -   Calculate the control coefficients $\frac{\partial \log S_{steady}}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
     * Look at: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
+````julia
+using ForwardDiff, DiffResults
+using ReverseDiff
+
+function enzyme_ode!(du, u, p)
+    S1, S2, S3, P = u
+    S, v0,  v1, v2, v3, K0, K1, K2, K3 = p 
+
+    du[1] = v0*S /(K0 + S ) - v1*S1/(K1 + S1)
+    du[2] = v1*S1/(K1 + S1) - v2*S2/(K2 + S2)
+    du[3] = v2*S2/(K2 + S2) - v3*S3/(K3 + S3)
+    du[4]  = v3*S3/(K3 + S3)
+    
+    du
+end
+
+u0 = [steady_sol... 0] #[S1, S2, S3, P]
+p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
+
+tspan = (0., 10.)
+prob = ODEProblem(enzyme_ode!, u0, tspan, p)
+sol = solve(prob)
+````
+
+
+````
+Error: BoundsError: attempt to access 0.0
+  at index [2]
+````
+
+
+
+````julia
+
+function sj(lp)
+
+  p = exp.(lp)
+  _prob = remake(prob;u0=convert.(eltype(p),prob.u0),p=p)
+  # steady state concentrations and flux
+  #substrates
+  substrates = solve(_prob, save_everystep=false)[end][1:3]
+  #flux
+  S1, S2, S3 = [substrates...]
+  S, v0,  v1, v2, v3, K0, K1, K2, K3 = p 
+  flux = v3*S3/(K3 + S3)
+  
+  log.([substrates... flux])
+end
+
+lp = log.(p)
+derivs = ForwardDiff.jacobian(sj,lp)
+````
+
+
+````
+Error: BoundsError: attempt to access 0.0
+  at index [2]
+````
+
+
 
 
 
 - Plot the control coefficients: Which parameters have the highest control over which variables? 
+
+````julia
+using DataFrames, DataFramesMeta, Gadfly
+parsymbols = [:S, :v0,  :v1, :v2, :v3, :K0, :K1, :K2, :K3]
+df =  DataFrame(derivs', [:S1, :S2, :S3, :J1])
+````
+
+
+````
+Error: UndefVarError: derivs not defined
+````
+
+
+
+````julia
+df =  @transform(df, par = parsymbols)
+````
+
+
+````
+Error: UndefVarError: df not defined
+````
+
+
+
+````julia
+df = stack(df, [1:4;])
+````
+
+
+````
+Error: UndefVarError: df not defined
+````
+
+
+
+````julia
+Gadfly.plot(df, x = :par, y = :value, xgroup = :variable, color = :par, Geom.subplot_grid(Geom.bar))
+````
+
+
+````
+Error: UndefVarError: df not defined
+````
+
 
 
 
