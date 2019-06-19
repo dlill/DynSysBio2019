@@ -81,7 +81,7 @@ E_{4} &5.0 & 5.0
 \end{aligned}
 $$
 
--   Implement the system and plot the solution in config-space.
+-   You can copy the following code:
 
 
 ````julia
@@ -111,8 +111,7 @@ plot(sol)
 
 
 
--   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux
-    $J = \dot{P}$ by simulating the system for long time periods.
+-   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux $ J = \dot{P} $ by simulating the system for long time periods.
 
 
 
