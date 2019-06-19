@@ -9,14 +9,6 @@ A short note on derivatives in scientific programming
 
 ## Ways to obtain derivatives
 
-* Finite differences 
-    * Difference quotient with finite $h$
-    * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
-    * They are ok for quick checks or as last resort, but better avoid them
-    * `FDM.jl`
-* Complex-step derivatives
-    * Are like finite-differences but with the advantage that there is no truncation error
-    * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
 * Code them manually
     * Possible for simple cases, potentially also automizable through computer algebra systems (Mathematica, sympy, yacas)
 * ODEs: Sensitivity Equations 
@@ -31,6 +23,14 @@ $$
 $$
     * Usually much more efficient, since you can take advantage of sparsity
     * In DifferentialEquations.jl: `ODELocalSensitivityProblem`
+* Finite differences 
+    * Difference quotient with finite $h$
+    * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
+    * They are ok for quick checks or as last resort, but better avoid them in "real problems"
+    * `FDM.jl` for some more sophisticated implementations
+* Complex-step derivatives
+    * Are like finite-differences but with the advantage that there is no truncation error
+    * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
 * Adjoint sensitivities: For scalar valued functions, very efficient for systems with many parameters
     * More here
 * Algorithmic differention / automatic differentiation / autodiff 
@@ -107,9 +107,6 @@ $$
 
 
 # Homework
-
-
-
 
 - Run the following system with the Euler method and use a custom finite difference function to obtain the parameter derivatives for different sizes of $\Delta p$
 - Then, implement the sensitivity equations for f! and compare the results
