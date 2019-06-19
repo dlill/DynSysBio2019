@@ -45,7 +45,6 @@ $$
     * This is ** *the* ** reason why to use julia.
 
 
-
 Exercise 1: Enzyme reaction chain
 ---------------------------------
 
@@ -96,7 +95,7 @@ $$
 
 
 
--   Calculate the control coefficients $\frac{\partial \log S_{steady}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
+-   Calculate the control coefficients $\frac{\partial \log S_{steady}}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
     * Hint: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
 
