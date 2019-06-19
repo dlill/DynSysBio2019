@@ -12,6 +12,7 @@ A short note on derivatives in scientific programming
 
 * Code them manually
     * Possible for simple cases, potentially also automizable through computer algebra systems (Mathematica, sympy, yacas)
+    * Try to avoid that
 * ODEs: Sensitivity Equations 
     * Reason: Integrator algorithms choose their step sizes according to the problem to minimize the numerical integration error
         * Different parameters -> different step sizes -> different errors -> with finite differences this leads to catastrophic errors and your derivs will be just rubbish
@@ -26,11 +27,18 @@ A short note on derivatives in scientific programming
     * They are ok for quick checks or as last resort, but better avoid them in "real problems"
     * `FDM.jl` for some more sophisticated implementations
 <p align="center"><img src="/Exercises/tex/ac1b3fcca7cc8b9f72520503e50eec28.svg?invert_in_darkmode&sanitize=true" align=middle width=229.59840585pt height=34.7253258pt/></p>
+
 * Complex-step derivatives
     * Are like finite-differences but with the advantage that there is no truncation error
     * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
-* Adjoint sensitivities: For scalar valued functions, very efficient for systems with many parameters
-    * More here
+
+* Adjoint sensitivities 
+    * For problems consisting of scalar valued function `obj(x(p))` + constraint `constr(x,p) = 0`
+    * obtain gradient of f without calculating the model sensitivities themselves
+    * Best for systems with many parameters
+    * More here https://cs.stanford.edu/~ambrad/adjoint_tutorial.pdf
+
+
 * Algorithmic / automatic differentiation
     * Let the programming language do the work
     * Idea: Propagate derivatives through the function via chain rule
@@ -56,34 +64,61 @@ values:
 -   Implement the system and plot the solution in config-space.
 
 
+````julia
+
+function enzyme_ode!(du, u, p, t)
+    S1, S2, S3, P = u
+    S, v0,  v1, v2,  v3, K0, K1, K2, K3 = p 
+
+    dS1 = v0*S /(K0 + S ) - v1*S1/(K1 + S1)
+    dS2 = v1*S1/(K1 + S1) - v2*S2/(K2 + S2)
+    dS3 = v2*S2/(K2 + S2) - v3*S3/(K3 + S3)
+    dP  = v3*S3/(K3 + S3)
+    
+    du[:] = [dS1, dS2, dS3, dP]
+end
+
+u0 = zeros(4) #[S1, S2, S3, P]
+p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
+
+tspan = (0., 100.)
+prb = ODEProblem(enzyme_ode!, u0, tspan, p)
+sol = solve(prb)
+
+plot(sol)
+````
+
 
 
 
 -   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux
-    $J$ by simulating the system for long time periods.
+    $J = \dot{P}$ by simulating the system for long time periods.
 
 
 
 
 - Have a look at the function `SteadyStateProblem` and use it to
-  calculate the steady state concentrations of the enzymes <img src="/Exercises/tex/264fba1c7ab2f0bc1611dac6780708a6.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/>, <img src="/Exercises/tex/7684afeaf2968f03abc32b7d309d9ff2.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and <img src="/Exercises/tex/e7169a2e6327a4bcd8ca4eb4a4ed9056.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/>.
-  How do you think it works i.e. what's the math behind it (think back to the very first tutorial)?
+  calculate the steady state concentrations of the enzymes <img src="/Exercises/tex/264fba1c7ab2f0bc1611dac6780708a6.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/>, <img src="/Exercises/tex/7684afeaf2968f03abc32b7d309d9ff2.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and <img src="/Exercises/tex/e7169a2e6327a4bcd8ca4eb4a4ed9056.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> without simulating the system
+  How does this work i.e. what's the math behind it (think back to the very first tutorial)?
 
 
 
 
-- Use the solution to calculate the flux
+- Use the steady-state solution of the substrates to calculate the flux
 
 
+
+
+- One at a time, increase each parameter by 10% and evaluate its effect on <img src="/Exercises/tex/51f9b2aca768c5ee7f18b00ee38be8dc.svg?invert_in_darkmode&sanitize=true" align=middle width=34.66892384999999pt height=22.831056599999986pt/>
 
 
 -   Calculate the control coefficients <img src="/Exercises/tex/7a2fd94fad05d47d3b51a2ed6732827b.svg?invert_in_darkmode&sanitize=true" align=middle width=72.5650233pt height=32.85834419999999pt/> and <img src="/Exercises/tex/fb3dee2285d6e0d0f04aed56a3f2cd0f.svg?invert_in_darkmode&sanitize=true" align=middle width=37.5797829pt height=30.648287999999997pt/> using `ForwardDiff.jl`.
-    * Hint: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
+    * Look at: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
 
 
 
-- Plot the control coefficients: Which parameters have the highest control over which variables?
+- Plot the control coefficients: Which parameters have the highest control over which variables? 
 
 
 
@@ -92,11 +127,7 @@ values:
 
 # Homework
 
-- Run the following system with the Euler method and use a custom finite difference function to obtain the parameter derivatives for different sizes of <img src="/Exercises/tex/67b12e5154d85faf7bd6f256f2eebdaa.svg?invert_in_darkmode&sanitize=true" align=middle width=21.969238499999992pt height=22.465723500000017pt/>
-- Then, implement the sensitivity equations for f! and compare the results
-
-
-
+* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = 10. .^ [-16:0;]`, determine the order magnitude of `h` where it becomes numericall instable.
 
 Cathedral exercise:
 -------------------
