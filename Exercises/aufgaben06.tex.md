@@ -30,7 +30,7 @@ $$
 $$
 \partial_x f = \frac{f(x) - f(x+h)}{h} + \mathcal{O}(h^2)
 $$
-
+* 
     * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
     * They are ok for quick checks or as last resort, but better avoid them in "real problems"
     * `FDM.jl` for some more sophisticated implementations
