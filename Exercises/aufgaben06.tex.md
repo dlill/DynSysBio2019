@@ -12,6 +12,7 @@ A short note on derivatives in scientific programming
 
 * Code them manually
     * Possible for simple cases, potentially also automizable through computer algebra systems (Mathematica, sympy, yacas)
+    * Try to avoid that
 * ODEs: Sensitivity Equations 
     * Reason: Integrator algorithms choose their step sizes according to the problem to minimize the numerical integration error
         * Different parameters -> different step sizes -> different errors -> with finite differences this leads to catastrophic errors and your derivs will be just rubbish
@@ -33,11 +34,18 @@ $$
 $$
 \partial_x f = \frac{f(x) - f(x+h)}{h} + \mathcal{O}(h^2)
 $$
+
 * Complex-step derivatives
     * Are like finite-differences but with the advantage that there is no truncation error
     * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
-* Adjoint sensitivities: For scalar valued functions, very efficient for systems with many parameters
-    * More here
+
+* Adjoint sensitivities 
+    * For problems consisting of scalar valued function `obj(x(p))` + constraint `constr(x,p) = 0`
+    * obtain gradient of f without calculating the model sensitivities themselves
+    * Best for systems with many parameters
+    * More here https://cs.stanford.edu/~ambrad/adjoint_tutorial.pdf
+
+
 * Algorithmic / automatic differentiation
     * Let the programming language do the work
     * Idea: Propagate derivatives through the function via chain rule
@@ -76,34 +84,61 @@ $$
 -   Implement the system and plot the solution in config-space.
 
 
+````julia
+
+function enzyme_ode!(du, u, p, t)
+    S1, S2, S3, P = u
+    S, v0,  v1, v2,  v3, K0, K1, K2, K3 = p 
+
+    dS1 = v0*S /(K0 + S ) - v1*S1/(K1 + S1)
+    dS2 = v1*S1/(K1 + S1) - v2*S2/(K2 + S2)
+    dS3 = v2*S2/(K2 + S2) - v3*S3/(K3 + S3)
+    dP  = v3*S3/(K3 + S3)
+    
+    du[:] = [dS1, dS2, dS3, dP]
+end
+
+u0 = zeros(4) #[S1, S2, S3, P]
+p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
+
+tspan = (0., 100.)
+prb = ODEProblem(enzyme_ode!, u0, tspan, p)
+sol = solve(prb)
+
+plot(sol)
+````
+
 
 
 
 -   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux
-    $J$ by simulating the system for long time periods.
+    $J = \dot{P}$ by simulating the system for long time periods.
 
 
 
 
 - Have a look at the function `SteadyStateProblem` and use it to
-  calculate the steady state concentrations of the enzymes $S_1$, $S_2$ and $S_3$.
-  How do you think it works i.e. what's the math behind it (think back to the very first tutorial)?
+  calculate the steady state concentrations of the enzymes $S_1$, $S_2$ and $S_3$ without simulating the system
+  How does this work i.e. what's the math behind it (think back to the very first tutorial)?
 
 
 
 
-- Use the solution to calculate the flux
+- Use the steady-state solution of the substrates to calculate the flux
 
 
+
+
+- One at a time, increase each parameter by 10% and evaluate its effect on $\log J$
 
 
 -   Calculate the control coefficients $\frac{\partial \log S_{steady}}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
-    * Hint: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
+    * Look at: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
 
 
 
-- Plot the control coefficients: Which parameters have the highest control over which variables?
+- Plot the control coefficients: Which parameters have the highest control over which variables? 
 
 
 
@@ -112,11 +147,7 @@ $$
 
 # Homework
 
-- Run the following system with the Euler method and use a custom finite difference function to obtain the parameter derivatives for different sizes of $\Delta p$
-- Then, implement the sensitivity equations for f! and compare the results
-
-
-
+* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = 10. .^ [-16:0;]`, determine the order magnitude of `h` where it becomes numericall instable.
 
 Cathedral exercise:
 -------------------
