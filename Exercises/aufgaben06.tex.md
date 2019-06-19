@@ -111,7 +111,7 @@ plot(sol)
 
 
 
--   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux $ J = \dot{P} $ by simulating the system for long time periods.
+-   Determine the steady state concentrations $S_{1}, S_{2}$ and $S_{3}$ and the steady state flux $ J = \dot{P}|_{\text{steady state}} $ by simulating the system for long time periods.
 
 
 
@@ -146,7 +146,7 @@ plot(sol)
 
 # Homework
 
-* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where it becomes numerically instable.
+* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where the derivatives become numerically instable.
 
 
 Cathedral exercise:
