@@ -126,7 +126,8 @@ plot(sol)
 
 # Homework
 
-* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = 10. .^ [-16:0;]`, determine the order magnitude of `h` where it becomes numericall instable.
+* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where it becomes numerically instable.
+
 
 Cathedral exercise:
 -------------------
