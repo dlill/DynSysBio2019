@@ -22,7 +22,7 @@ A short note on derivatives in scientific programming
 $$
 \begin{aligned}
 \dot{u} &= f(u,p) \\
-\dot{\frac{\partial u}{\partial p}} = \partial_u f \partial_p x + \partial_p f
+\dot{\frac{\partial u}{\partial p}} &= \partial_u f \partial_p x + \partial_p f
 \end{aligned}
 $$
 
@@ -36,13 +36,13 @@ $$
     * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
 * Adjoint sensitivities: For scalar valued functions, very efficient for systems with many parameters
     * More here
-* Algorithmic differention / automatic differentiation / autodiff 
+* Algorithmic / automatic differentiation
     * Let the programming language do the work
-        * Idea: Propagate derivatives through the function via chain rule
-    * Good example on wikipedia
+    * Idea: Propagate derivatives through the function via chain rule
+    * Good example on https://en.wikipedia.org/wiki/Automatic_differentiation
     * Very efficient for some problems and very convenient
     * Drawback: Implementation easiest if all functions are implemented in the same language
-        * This is ** *the* ** reason why to use julia.
+    * This is ** *the* ** reason why to use julia.
 
 
 
