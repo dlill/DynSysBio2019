@@ -163,35 +163,25 @@ u: 3-element Array{Float64,1}:
 - Use the steady-state solution of the substrates to calculate the flux
 
 ````julia
-enzyme_ode!(zeros(4), [steady_sol.u... 0], p, 0.1)
-
-using DiffEqBiological
-rn = @reaction_network begin
-    mm(S, v0, K0), 0 --> S1
-    v1/(K1+S1), S1 --> S2
-    v2/(K2+S2), S2 --> S3
-    v3/(K3+S3), S3 --> P
-end S v0  v1 v2  v3 K0 K1 K2 K3
+enzyme_ode!(zeros(4), [steady_sol.u... 0], p, 0.1)[4]
 ````
 
 
 ````
-(::Main.WeaveSandBox3.reaction_network) (generic function with 2 methods)
+0.09090909090909093
 ````
 
 
 
 
 
-- One at a time, increase each parameter by 10% and evaluate its effect on <img src="/Exercises/tex/51f9b2aca768c5ee7f18b00ee38be8dc.svg?invert_in_darkmode&sanitize=true" align=middle width=34.66892384999999pt height=22.831056599999986pt/>
 
 
 -   Calculate the control coefficients <img src="/Exercises/tex/7a2fd94fad05d47d3b51a2ed6732827b.svg?invert_in_darkmode&sanitize=true" align=middle width=72.5650233pt height=32.85834419999999pt/> and <img src="/Exercises/tex/fb3dee2285d6e0d0f04aed56a3f2cd0f.svg?invert_in_darkmode&sanitize=true" align=middle width=37.5797829pt height=30.648287999999997pt/> using `ForwardDiff.jl`.
     * Look at: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
 ````julia
-using ForwardDiff, DiffResults
-using ReverseDiff
+using ForwardDiff
 
 function enzyme_ode!(du, u, p)
     S1, S2, S3, P = u
@@ -208,7 +198,7 @@ end
 u0 = [steady_sol... 0] #[S1, S2, S3, P]
 p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
 
-tspan = (0., 10.)
+tspan = (0., 1e10)
 prob = ODEProblem(enzyme_ode!, u0, tspan, p)
 sol = solve(prob)
 
@@ -233,11 +223,14 @@ derivs = ForwardDiff.jacobian(sj,lp)
 
 
 ````
-4×9 Array{Float64,2}:
- 0.0998243    1.09807     -1.09807     …   0.0          0.0       
- 0.0072394    0.0796334    0.010901        0.00823041   0.0       
- 0.000589544  0.00648498   0.00103633     -0.0913515    0.993981  
- 0.000578825  0.00636707   0.00101748     -0.0896906   -0.00590934
+Error: MethodError: no method matching Float64(::ForwardDiff.Dual{ForwardDi
+ff.Tag{typeof(Main.WeaveSandBox5.sj),Float64},Float64,9})
+Closest candidates are:
+  Float64(::Real, !Matched::RoundingMode) where T<:AbstractFloat at roundin
+g.jl:194
+  Float64(::T<:Number) where T<:Number at boot.jl:741
+  Float64(!Matched::Int8) at float.jl:60
+  ...
 ````
 
 
@@ -249,22 +242,48 @@ derivs = ForwardDiff.jacobian(sj,lp)
 ````julia
 using DataFrames, DataFramesMeta, Gadfly
 parsymbols = [:S, :v0,  :v1, :v2, :v3, :K0, :K1, :K2, :K3]
-df =  DataFrame(derivs', [:S1, :S2, :S3, :J1]) 
+df =  DataFrame(derivs', [:S1, :S2, :S3, :J1])
+````
+
+
+````
+Error: UndefVarError: derivs not defined
+````
+
+
+
+````julia
 df =  @transform(df, par = parsymbols)
+````
+
+
+````
+Error: UndefVarError: df not defined
+````
+
+
+
+````julia
 df = stack(df, [1:4;])
+````
+
+
+````
+Error: UndefVarError: df not defined
+````
+
+
+
+````julia
 Gadfly.plot(df, x = :par, y = :value, xgroup = :variable, color = :par, Geom.subplot_grid(Geom.bar))
 ````
 
 
 ````
-Error: The Cairo and Fontconfig packages are necessary for saving as PNG.
-Add them with the package manager if necessary, then run:
-  import Cairo, Fontconfig
-before invoking PNG.
+Error: UndefVarError: df not defined
 ````
 
 
-![](figures/aufgaben06_solution_6_1.png)
 
 
 
@@ -272,6 +291,7 @@ before invoking PNG.
 
 # Homework
 
+* One at a time, increase each parameter by 10% and evaluate its effect on <img src="/Exercises/tex/51f9b2aca768c5ee7f18b00ee38be8dc.svg?invert_in_darkmode&sanitize=true" align=middle width=34.66892384999999pt height=22.831056599999986pt/>
 * Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where the derivatives become numerically instable.
 
 
