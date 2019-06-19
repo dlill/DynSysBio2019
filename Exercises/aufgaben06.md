@@ -65,11 +65,6 @@ values:
 
 ````julia
 using DifferentialEquations, Plots
-````
-
-
-
-````julia
 
 function enzyme_ode!(du, u, p, t)
     S1, S2, S3, P = u
@@ -94,41 +89,22 @@ plot(sol)
 ````
 
 
+![](figures/aufgaben06_solution_1_1.png)
+
 
 
 -   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux <img src="/Exercises/tex/3d2b60c560f40e84255d4061656002db.svg?invert_in_darkmode&sanitize=true" align=middle width=119.23427504999998pt height=30.267491100000004pt/> by simulating the system for long time periods.
 
 ````julia
-prb = ODEProblem(enzyme_ode!, u0, (0.,10000.), p)
-````
-
-
-````
-Error: UndefVarError: enzyme_ode! not defined
-````
-
-
-
-````julia
+prb = ODEProblem(enzyme_ode!, u0, (0.,1e10), p)
 sol = solve(prb)
-````
-
-
-````
-Error: UndefVarError: prb not defined
-````
-
-
-
-````julia
-
 
 print(last(sol))
 ````
 
 
 ````
-Error: UndefVarError: sol not defined
+[0.1, 10.0, 0.0925926, 9.09091e8]
 ````
 
 
@@ -136,23 +112,17 @@ Error: UndefVarError: sol not defined
 ````julia
 
 plot(sol)
-````
-
-
-````
-Error: UndefVarError: sol not defined
-````
-
-
-
-````julia
 
 enzyme_ode!(zeros(4), last(sol), p, 0)
 ````
 
 
 ````
-Error: UndefVarError: sol not defined
+4-element Array{Float64,1}:
+  0.0                  
+ -4.163336342344337e-17
+  5.551115123125783e-17
+  0.0909090909090909
 ````
 
 
@@ -194,16 +164,6 @@ u: 3-element Array{Float64,1}:
 
 ````julia
 enzyme_ode!(zeros(4), [steady_sol.u... 0], p, 0.1)
-````
-
-
-````
-Error: UndefVarError: enzyme_ode! not defined
-````
-
-
-
-````julia
 
 using DiffEqBiological
 rn = @reaction_network begin
@@ -216,7 +176,7 @@ end S v0  v1 v2  v3 K0 K1 K2 K3
 
 
 ````
-(::Main.WeaveSandBox1.reaction_network) (generic function with 2 methods)
+(::Main.WeaveSandBox3.reaction_network) (generic function with 2 methods)
 ````
 
 
@@ -251,17 +211,6 @@ p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
 tspan = (0., 10.)
 prob = ODEProblem(enzyme_ode!, u0, tspan, p)
 sol = solve(prob)
-````
-
-
-````
-Error: BoundsError: attempt to access 0.0
-  at index [2]
-````
-
-
-
-````julia
 
 function sj(lp)
 
@@ -284,8 +233,11 @@ derivs = ForwardDiff.jacobian(sj,lp)
 
 
 ````
-Error: BoundsError: attempt to access 0.0
-  at index [2]
+4×9 Array{Float64,2}:
+ 0.0998243    1.09807     -1.09807     …   0.0          0.0       
+ 0.0072394    0.0796334    0.010901        0.00823041   0.0       
+ 0.000589544  0.00648498   0.00103633     -0.0913515    0.993981  
+ 0.000578825  0.00636707   0.00101748     -0.0896906   -0.00590934
 ````
 
 
@@ -297,48 +249,22 @@ Error: BoundsError: attempt to access 0.0
 ````julia
 using DataFrames, DataFramesMeta, Gadfly
 parsymbols = [:S, :v0,  :v1, :v2, :v3, :K0, :K1, :K2, :K3]
-df =  DataFrame(derivs', [:S1, :S2, :S3, :J1])
-````
-
-
-````
-Error: UndefVarError: derivs not defined
-````
-
-
-
-````julia
+df =  DataFrame(derivs', [:S1, :S2, :S3, :J1]) 
 df =  @transform(df, par = parsymbols)
-````
-
-
-````
-Error: UndefVarError: df not defined
-````
-
-
-
-````julia
 df = stack(df, [1:4;])
-````
-
-
-````
-Error: UndefVarError: df not defined
-````
-
-
-
-````julia
 Gadfly.plot(df, x = :par, y = :value, xgroup = :variable, color = :par, Geom.subplot_grid(Geom.bar))
 ````
 
 
 ````
-Error: UndefVarError: df not defined
+Error: The Cairo and Fontconfig packages are necessary for saving as PNG.
+Add them with the package manager if necessary, then run:
+  import Cairo, Fontconfig
+before invoking PNG.
 ````
 
 
+![](figures/aufgaben06_solution_6_1.png)
 
 
 
