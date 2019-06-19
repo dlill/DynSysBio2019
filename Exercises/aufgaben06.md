@@ -21,12 +21,11 @@ A short note on derivatives in scientific programming
 <p align="center"><img src="/Exercises/tex/9276faed150d6f6ac2beac56406116fb.svg?invert_in_darkmode&sanitize=true" align=middle width=160.47149745pt height=77.39588504999999pt/></p>
 
 * Finite differences 
-    * Difference quotient with finite $h$
-<p align="center"><img src="/Exercises/tex/ac1b3fcca7cc8b9f72520503e50eec28.svg?invert_in_darkmode&sanitize=true" align=middle width=229.59840585pt height=34.7253258pt/></p>
-* 
+    * Difference quotient with finite ``h``
     * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
     * They are ok for quick checks or as last resort, but better avoid them in "real problems"
     * `FDM.jl` for some more sophisticated implementations
+<p align="center"><img src="/Exercises/tex/ac1b3fcca7cc8b9f72520503e50eec28.svg?invert_in_darkmode&sanitize=true" align=middle width=229.59840585pt height=34.7253258pt/></p>
 * Complex-step derivatives
     * Are like finite-differences but with the advantage that there is no truncation error
     * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
