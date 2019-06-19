@@ -26,14 +26,13 @@ $$
 $$
 
 * Finite differences 
-    * Difference quotient with finite $h$
-$$
-\partial_x f = \frac{f(x) - f(x+h)}{h} + \mathcal{O}(h^2)
-$$
-* 
+    * Difference quotient with finite ``h``
     * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
     * They are ok for quick checks or as last resort, but better avoid them in "real problems"
     * `FDM.jl` for some more sophisticated implementations
+$$
+\partial_x f = \frac{f(x) - f(x+h)}{h} + \mathcal{O}(h^2)
+$$
 * Complex-step derivatives
     * Are like finite-differences but with the advantage that there is no truncation error
     * https://en.wikipedia.org/wiki/Numerical_differentiation#Complex-variable_methods 
