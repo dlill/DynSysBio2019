@@ -61,7 +61,7 @@ values:
 
 <p align="center"><img src="/Exercises/tex/d856cc10e234c8ef56d3dc1e20709aa6.svg?invert_in_darkmode&sanitize=true" align=middle width=101.16059249999999pt height=112.32872805pt/></p>
 
--   Implement the system and plot the solution in config-space.
+-   You can copy the following code:
 
 
 ````julia
@@ -91,8 +91,7 @@ plot(sol)
 
 
 
--   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux
-    $J = \dot{P}$ by simulating the system for long time periods.
+-   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux <img src="/Exercises/tex/b811e700d37f07c3be5c655875ceb7a3.svg?invert_in_darkmode&sanitize=true" align=middle width=45.450756449999986pt height=30.267491100000004pt/> by simulating the system for long time periods.
 
 
 
