@@ -51,7 +51,8 @@ Exercise 1: Enzyme reaction chain
 
 Consider a chain of Michaelis-Menten enzyme reactions:
 
-$$ S \stackrel{E_{1}}{\longrightarrow} S_{1}
+$$ 
+S \stackrel{E_{1}}{\longrightarrow} S_{1}
 \stackrel{E_{2}}{\longrightarrow} S_{2}
 \stackrel{E_{3}}{\longrightarrow} S_{3}
 \stackrel{E_{4}}{\longrightarrow} P 
@@ -62,13 +63,13 @@ $V_{max}$ and $K_{M}$
 values:
 
 $$ 
-\begin{align} 
+\begin{aligned} 
       &V_{max} &  K_{M} \\ 
 E_{1} &0.1 & 0.1 \\ 
 E_{2} &1.0 & 1.0 \\ 
 E_{3} &1.0 & 0.1 \\ 
 E_{4} &5.0 & 5.0 \\ 
-\end{align}
+\end{aligned}
 $$
 
 -   Implement the system and plot the solution in config-space.
