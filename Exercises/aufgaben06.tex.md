@@ -62,13 +62,13 @@ $V_{max}$ and $K_{M}$
 values:
 
 $$ 
-\begin{align\*} 
+\begin{align} 
       &V_{max} &  K_{M} \\ 
 E_{1} &0.1 & 0.1 \\ 
 E_{2} &1.0 & 1.0 \\ 
 E_{3} &1.0 & 0.1 \\ 
 E_{4} &5.0 & 5.0 \\ 
-\end{align\*}
+\end{align}
 $$
 
 -   Implement the system and plot the solution in config-space.
@@ -91,16 +91,10 @@ $$
 
 
 
-# [] could be solved with Interactive.jl but drop this here?
--   Evaluate the steady state concentrations and flux by varying the
-    $V_{{max}}$ values. Use the `manipulate`
-    package for an interactive visualization and plot the original
-    values along.
 
 -   Calculate the control coefficients $\frac{\partial \log S_{steady}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
     * Hint: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
-# [] Implement using ForwardDiff.jl
 
 
 - Plot the control coefficients: Which parameters have the highest control over which variables?
