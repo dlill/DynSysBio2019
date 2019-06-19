@@ -18,11 +18,10 @@ A short note on derivatives in scientific programming
     * Idea: Just integrate the derivatives along with the ode itself:
     * Usually much more efficient, since you can take advantage of sparsity
     * In DifferentialEquations.jl: `ODELocalSensitivityProblem`
-
-<p align="center"><img src="/Exercises/tex/a11fcc1aa25c105b3a07810f15617249.svg?invert_in_darkmode&sanitize=true" align=middle width=142.03428195pt height=65.73130739999999pt/></p>
-
+<p align="center"><img src="/Exercises/tex/9276faed150d6f6ac2beac56406116fb.svg?invert_in_darkmode&sanitize=true" align=middle width=160.47149745pt height=77.39588504999999pt/></p>
 * Finite differences 
     * Difference quotient with finite $h$
+<p align="center"><img src="/Exercises/tex/ac1b3fcca7cc8b9f72520503e50eec28.svg?invert_in_darkmode&sanitize=true" align=middle width=229.59840585pt height=34.7253258pt/></p>
     * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
     * They are ok for quick checks or as last resort, but better avoid them in "real problems"
     * `FDM.jl` for some more sophisticated implementations
