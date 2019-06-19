@@ -16,6 +16,8 @@ A short note on derivatives in scientific programming
     * Reason: Integrator algorithms choose their step sizes according to the problem to minimize the numerical integration error
         * Different parameters -> different step sizes -> different errors -> with finite differences this leads to catastrophic errors and your derivs will be just rubbish
     * Idea: Just integrate the derivatives along with the ode itself:
+    * Usually much more efficient, since you can take advantage of sparsity
+    * In DifferentialEquations.jl: `ODELocalSensitivityProblem`
 
 $$
 \begin{aligned}
@@ -24,8 +26,6 @@ $$
 \end{aligned}
 $$
 
-    * Usually much more efficient, since you can take advantage of sparsity
-    * In DifferentialEquations.jl: `ODELocalSensitivityProblem`
 * Finite differences 
     * Difference quotient with finite $h$
     * Higher order derivatives possible by iterative derivation, e.g. https://en.wikipedia.org/wiki/Discrete_Laplace_operator and https://github.com/JuliaDiffEq/DiffEqOperators.jl
