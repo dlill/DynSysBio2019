@@ -91,7 +91,7 @@ plot(sol)
 
 
 
--   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux <img src="/Exercises/tex/b811e700d37f07c3be5c655875ceb7a3.svg?invert_in_darkmode&sanitize=true" align=middle width=45.450756449999986pt height=30.267491100000004pt/> by simulating the system for long time periods.
+-   Determine the steady state concentrations <img src="/Exercises/tex/035338c566fdee799fc39fd257ec8ac9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.39273984999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/c68ef56934194a9ec1b74723b82e220e.svg?invert_in_darkmode&sanitize=true" align=middle width=16.632471899999988pt height=22.465723500000017pt/> and the steady state flux <img src="/Exercises/tex/3d2b60c560f40e84255d4061656002db.svg?invert_in_darkmode&sanitize=true" align=middle width=119.23427504999998pt height=30.267491100000004pt/> by simulating the system for long time periods.
 
 
 
@@ -126,7 +126,7 @@ plot(sol)
 
 # Homework
 
-* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where it becomes numerically instable.
+* Implement the control coefficients with finite differences, evaluate the control coefficients for different `h = [10. ^x for x in -16:0]`, determine the order magnitude of `h` where the derivatives become numerically instable.
 
 
 Cathedral exercise:
