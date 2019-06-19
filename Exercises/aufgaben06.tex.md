@@ -6,8 +6,9 @@ A short note on derivatives in scientific programming
 * Derivatives are very important for a lot things
     * Efficient optimization
     * Sensitivity analysis
+    * Today: Control theory
 
-## Ways to obtain derivatives
+**Ways to obtain derivatives**
 
 * Code them manually
     * Possible for simple cases, potentially also automizable through computer algebra systems (Mathematica, sympy, yacas)
@@ -15,12 +16,14 @@ A short note on derivatives in scientific programming
     * Reason: Integrator algorithms choose their step sizes according to the problem to minimize the numerical integration error
         * Different parameters -> different step sizes -> different errors -> with finite differences this leads to catastrophic errors and your derivs will be just rubbish
     * Idea: Just integrate the derivatives along with the ode itself:
+
 $$
 \begin{aligned}
 \dot{u} &= f(u,p) \\
 \dot{\frac{\partial u}{\partial p}} = \partial_u f \partial_p x + \partial_p f
 \end{aligned}
 $$
+
     * Usually much more efficient, since you can take advantage of sparsity
     * In DifferentialEquations.jl: `ODELocalSensitivityProblem`
 * Finite differences 
@@ -51,7 +54,8 @@ Consider a chain of Michaelis-Menten enzyme reactions:
 $$ S \stackrel{E_{1}}{\longrightarrow} S_{1}
 \stackrel{E_{2}}{\longrightarrow} S_{2}
 \stackrel{E_{3}}{\longrightarrow} S_{3}
-\stackrel{E_{4}}{\longrightarrow} P $$
+\stackrel{E_{4}}{\longrightarrow} P 
+$$
 
 for a constant concentration $S=1$ and given
 $V_{max}$ and $K_{M}$
