@@ -68,11 +68,13 @@ $$
 E_{1} &0.1 & 0.1 \\ 
 E_{2} &1.0 & 1.0 \\ 
 E_{3} &1.0 & 0.1 \\ 
-E_{4} &5.0 & 5.0 \\ 
+E_{4} &5.0 & 5.0 
 \end{aligned}
 $$
 
 -   Implement the system and plot the solution in config-space.
+
+
 
 
 
@@ -88,6 +90,7 @@ $$
 
 
 
+
 - Use the solution to calculate the flux
 
 
@@ -95,6 +98,7 @@ $$
 
 -   Calculate the control coefficients $\frac{\partial \log S_{steady}{\partial \log p}$ and $\frac{\partial \log J}{\partial \log p}$ using `ForwardDiff.jl`.
     * Hint: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
+
 
 
 
@@ -109,7 +113,6 @@ $$
 
 - Run the following system with the Euler method and use a custom finite difference function to obtain the parameter derivatives for different sizes of $\Delta p$
 - Then, implement the sensitivity equations for f! and compare the results
-
 
 
 
