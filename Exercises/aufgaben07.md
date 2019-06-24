@@ -1,0 +1,98 @@
+# Tutorial 7
+
+# Exercise 1: Positive cooperative feedback
+
+Consider a protein <img src="/Exercises/tex/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode&sanitize=true" align=middle width=12.32879834999999pt height=22.465723500000017pt/> being phosphorylated by a stimulus <img src="/Exercises/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> with rate <img src="/Exercises/tex/aa90653a26bc63b138fb304972d81589.svg?invert_in_darkmode&sanitize=true" align=middle width=15.11042279999999pt height=22.831056599999986pt/> and dephosphorylated with rate <img src="/Exercises/tex/125a6d66340868dbdadbf666c1cc8013.svg?invert_in_darkmode&sanitize=true" align=middle width=25.38444479999999pt height=22.831056599999986pt/>. The phosphorylation is cooperatively enhanced by a positiv feedback with hill coefficient <img src="/Exercises/tex/af2ce08c06aa1b32f10b0a102be4b8da.svg?invert_in_darkmode&sanitize=true" align=middle width=39.21220214999999pt height=22.831056599999986pt/> and rate <img src="/Exercises/tex/a8ebf8c468236800b8ed78d42ddbfa57.svg?invert_in_darkmode&sanitize=true" align=middle width=15.11042279999999pt height=22.831056599999986pt/>:
+
+<p align="center"><img src="/Exercises/tex/82be3b6a2dd5b71eac8e863a8a076959.svg?invert_in_darkmode&sanitize=true" align=middle width=356.4801207pt height=39.84127125pt/></p>
+
+Further assume that the total amount of protein equals 1 (<img src="/Exercises/tex/60efd072d491e63468e8b81b77b4dee2.svg?invert_in_darkmode&sanitize=true" align=middle width=145.32512939999998pt height=22.465723500000017pt/>):
+
+<p align="center"><img src="/Exercises/tex/b9279fdb593a4dbda68bfe04081e34c7.svg?invert_in_darkmode&sanitize=true" align=middle width=405.84673469999996pt height=40.11819404999999pt/></p>
+
+The parameters are given by <img src="/Exercises/tex/5d5b9849409c22af26f4bab8ce168583.svg?invert_in_darkmode&sanitize=true" align=middle width=58.85460899999999pt height=22.831056599999986pt/>, <img src="/Exercises/tex/e0eb906145588b0dd579a262f2b49230.svg?invert_in_darkmode&sanitize=true" align=middle width=56.343173699999994pt height=22.831056599999986pt/>, <img src="/Exercises/tex/477fd4768db8e43e8dee94ab06184b3c.svg?invert_in_darkmode&sanitize=true" align=middle width=46.069176449999986pt height=22.831056599999986pt/> and <img src="/Exercises/tex/cc83bf1ee2834721cc2a8f2992f0aa9c.svg?invert_in_darkmode&sanitize=true" align=middle width=69.37025039999999pt height=22.465723500000017pt/>.
+
+
+* Implement the system and plot the solution in config-space for <img src="/Exercises/tex/d84206481777e6d1fdc67afe1b978c8a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.16422309999999pt height=22.465723500000017pt/>. 
+````julia
+
+using DifferentialEquations, Plots
+
+function feedback!(du, u, p, t) 
+    A, pA = u
+    S, k1, k_1, k2, Km = p
+    du[2] = (k1*S+k2*pA^4/(Km^4 + pA^4))*(1-pA) - k_1*pA
+    du[1] = -du[2]
+    return du
+end
+
+p =  [1 0.1 1 2 0.3] # S, k1, k_1, k2, Km
+u0 =  [1. 0] # A, pA 
+tspan = (0, 20.)
+
+prob = ODEProblem(feedback!, u0, tspan, p)
+sol = solve(prob)
+````
+
+
+
+
+* Compare the solution with the solution without a positive feedback.
+
+
+
+* Compute the system's steady state (see last tutorial) and run a quick consistency check that the results make sense. 
+    (If they don't, choose another method to compute the steady states or tune the hyperparameters to obtain more meaningful results.)
+
+
+* Write a function `tune_input(f, u0, input, p)` for the following task
+    Stimulate the system with $\text{input} = S \in [0,2]$ starting with $S = 0$, increasing $S$ in small steps until $S = 2$ and then reducing $S$ in small steps until $S = 0$ again. 
+    In each step, compute the steady state of the system and take its value as initial value for the next $S$ value. Start with $pA=0$ for $S=0$.
+    * Plot $pA$ vs $S$.
+    * How is the observed phenomenon called in physics?
+    * What is its meaning in biological systems? 
+
+
+
+
+* Generate a rate balance plot to illustrate the mode of action: plot the build and decay fluxes of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/> as a function of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/>.
+*   How can you extract information on the qualitative dynamics, especially the stability of the fixed points, from this plot?
+
+* Evaluate the system for smaller values of <img src="/Exercises/tex/a8ebf8c468236800b8ed78d42ddbfa57.svg?invert_in_darkmode&sanitize=true" align=middle width=15.11042279999999pt height=22.831056599999986pt/> and discover another, qualitatively different behavior of the system. How can this behavior be explained?
+
+
+
+# Exercise 2
+
+This model of a gene regulatory network was taken from [here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0003478#pone-0003478-g002)
+* If you have time, read the first few paragraphs of the introduction
+
+Assume this model describes a stem cell which is about to differentiate into one of two possible phenotypes (e.g. a skin cell or a muscle cell).
+To know, which cell type this cell has to choose, it processes the external information provided by the ratio of two biochemicals <img src="/Exercises/tex/9afe6a256a9817c76b579e6f5db9a578.svg?invert_in_darkmode&sanitize=true" align=middle width=12.99542474999999pt height=22.465723500000017pt/> and <img src="/Exercises/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/>. 
+In this model, the ratio is given as parameter `O_by_S == p[1]`.
+
+* Use your `tune_input` function from exercise 1 to find two different phenotypes (steady states) depending on the input. For reasonable ranges of the input, browse the paper)
+* Why is there a region of bistability (i.e. a range of inputs with two stable steady states)? 
+
+````julia
+
+function model2!(du, u, p, t)
+    N, G = u
+    O_by_S,    a1,a2,b1,b2,b3,γ_n,c1,c2,d1,d2,d3,γ_g = p
+    du[1] = (a1*O_by_S + a2*O_by_S * N) / (1 + b1*O_by_S + b2*O_by_S*N + b3*O_by_S*G) - γ_n * N
+    du[2] = (c1*O_by_S + c2*G) / (1 + d1*O_by_S + d2*G + d3*N) - γ_g * G
+end
+# p2 =O_by_S  a1  a2    b1  b2    b3  γ_n  c1   c2   d1   d2   d3  γ_g
+p2 = [1       .02 .0125 .02 .0125 .03 .01  .05 .0125 .05 .0125 .05 .01]
+u2 = ones(2)
+````
+
+
+
+
+
+
+
+Cathedral exercise:
+-------------------
+What is the story of the most famous waterspout?
