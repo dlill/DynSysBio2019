@@ -13,7 +13,7 @@ Further assume that the total amount of protein equals 1 (<img src="/Exercises/t
 The parameters are given by <img src="/Exercises/tex/5d5b9849409c22af26f4bab8ce168583.svg?invert_in_darkmode&sanitize=true" align=middle width=58.85460899999999pt height=22.831056599999986pt/>, <img src="/Exercises/tex/e0eb906145588b0dd579a262f2b49230.svg?invert_in_darkmode&sanitize=true" align=middle width=56.343173699999994pt height=22.831056599999986pt/>, <img src="/Exercises/tex/477fd4768db8e43e8dee94ab06184b3c.svg?invert_in_darkmode&sanitize=true" align=middle width=46.069176449999986pt height=22.831056599999986pt/> and <img src="/Exercises/tex/cc83bf1ee2834721cc2a8f2992f0aa9c.svg?invert_in_darkmode&sanitize=true" align=middle width=69.37025039999999pt height=22.465723500000017pt/>.
 
 
-* Implement the system and plot the solution in config-space for <img src="/Exercises/tex/d84206481777e6d1fdc67afe1b978c8a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.16422309999999pt height=22.465723500000017pt/>. 
+* Use the following system for the exercises
 ````julia
 
 using DifferentialEquations, Plots
@@ -46,9 +46,9 @@ sol = solve(prob)
 
 
 * Write a function `tune_input(f, u0, input, p)` for the following task
-    Stimulate the system with $\text{input} = S \in [0,2]$ starting with $S = 0$, increasing $S$ in small steps until $S = 2$ and then reducing $S$ in small steps until $S = 0$ again. 
-    In each step, compute the steady state of the system and take its value as initial value for the next $S$ value. Start with $pA=0$ for $S=0$.
-    * Plot $pA$ vs $S$.
+    Stimulate the system with input `S in [0,2]` starting with $ S = 0 $ , increasing $ S $ in small steps until $ S = 2 $ and then reducing $ S $ in small steps until $ S = 0 $ again. 
+    In each step, compute the steady state of the system and take its value as initial value for the next $ S $ value. Start with $ pA=0 $ for $ S=0 $.
+    * Plot $ pA $ vs $ S $.
     * How is the observed phenomenon called in physics?
     * What is its meaning in biological systems? 
 
