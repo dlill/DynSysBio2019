@@ -17,7 +17,7 @@ $$
 The parameters are given by $k_{1} = 0.1$, $k_{-1} = 1$, $k_{2} = 2$ and $K_{m} = 0.3$.
 
 
-* Implement the system and plot the solution in config-space for $S=1$. 
+* Use the following system for the exercises
 ````julia
 
 using DifferentialEquations, Plots
@@ -50,9 +50,9 @@ sol = solve(prob)
 
 
 * Write a function `tune_input(f, u0, input, p)` for the following task
-    Stimulate the system with $\text{input} = S \in [0,2]$ starting with $S = 0$, increasing $S$ in small steps until $S = 2$ and then reducing $S$ in small steps until $S = 0$ again. 
-    In each step, compute the steady state of the system and take its value as initial value for the next $S$ value. Start with $pA=0$ for $S=0$.
-    * Plot $pA$ vs $S$.
+    Stimulate the system with input `S in [0,2]` starting with $ S = 0 $ , increasing $ S $ in small steps until $ S = 2 $ and then reducing $ S $ in small steps until $ S = 0 $ again. 
+    In each step, compute the steady state of the system and take its value as initial value for the next $ S $ value. Start with $ pA=0 $ for $ S=0 $.
+    * Plot $ pA $ vs $ S $.
     * How is the observed phenomenon called in physics?
     * What is its meaning in biological systems? 
 
