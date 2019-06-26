@@ -46,9 +46,9 @@ sol = solve(prob)
 
 
 * Write a function `tune_input(f, u0, input, p)` for the following task
-    Stimulate the system with input `S in [0,2]` starting with $ S = 0 $ , increasing $ S $ in small steps until $ S = 2 $ and then reducing $ S $ in small steps until $ S = 0 $ again. 
-    In each step, compute the steady state of the system and take its value as initial value for the next $ S $ value. Start with $ pA=0 $ for $ S=0 $.
-    * Plot $ pA $ vs $ S $.
+    Stimulate the system with input `S in [0,2]` starting with `S = 0` , increasing `S` in small steps until `S = 2` and then reducing `S` in small steps until `S = 0` again. 
+    In each step, compute the steady state of the system and take its value as initial value for the next `S` value. Start with `pA=0` for `S=0`.
+    * Plot `pA` vs `S`.
     * How is the observed phenomenon called in physics?
     * What is its meaning in biological systems? 
 
@@ -56,6 +56,8 @@ sol = solve(prob)
 
 
 * Generate a rate balance plot to illustrate the mode of action: plot the build and decay fluxes of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/> as a function of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/>.
+
+
 *   How can you extract information on the qualitative dynamics, especially the stability of the fixed points, from this plot?
 
 * Evaluate the system for smaller values of <img src="/Exercises/tex/a8ebf8c468236800b8ed78d42ddbfa57.svg?invert_in_darkmode&sanitize=true" align=middle width=15.11042279999999pt height=22.831056599999986pt/> and discover another, qualitatively different behavior of the system. How can this behavior be explained?
@@ -65,6 +67,9 @@ sol = solve(prob)
 # Exercise 2
 
 This model of a gene regulatory network was taken from [here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0003478#pone-0003478-g002)
+
+![Model-sketch](https://journals.plos.org/plosone/article/figure/image?size=inline&id=info:doi/10.1371/journal.pone.0003478.g002)
+
 * If you have time, read the first few paragraphs of the introduction
 
 Assume this model describes a stem cell which is about to differentiate into one of two possible phenotypes (e.g. a skin cell or a muscle cell).
@@ -72,7 +77,7 @@ To know, which cell type this cell has to choose, it processes the external info
 In this model, the ratio is given as parameter `O_by_S == p[1]`.
 
 * Use your `tune_input` function from exercise 1 to find two different phenotypes (steady states) depending on the input. For reasonable ranges of the input, browse the paper)
-* Why is there a region of bistability (i.e. a range of inputs with two stable steady states)? 
+* What is the biological meaning of the region of bistability (i.e. a range of inputs with two stable steady states)? 
 
 ````julia
 
