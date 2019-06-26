@@ -50,9 +50,9 @@ sol = solve(prob)
 
 
 * Write a function `tune_input(f, u0, input, p)` for the following task
-    Stimulate the system with input `S in [0,2]` starting with $ S = 0 $ , increasing $ S $ in small steps until $ S = 2 $ and then reducing $ S $ in small steps until $ S = 0 $ again. 
-    In each step, compute the steady state of the system and take its value as initial value for the next $ S $ value. Start with $ pA=0 $ for $ S=0 $.
-    * Plot $ pA $ vs $ S $.
+    Stimulate the system with input `S in [0,2]` starting with `S = 0` , increasing `S` in small steps until `S = 2` and then reducing `S` in small steps until `S = 0` again. 
+    In each step, compute the steady state of the system and take its value as initial value for the next `S` value. Start with `pA=0` for `S=0`.
+    * Plot `pA` vs `S`.
     * How is the observed phenomenon called in physics?
     * What is its meaning in biological systems? 
 
@@ -60,6 +60,8 @@ sol = solve(prob)
 
 
 * Generate a rate balance plot to illustrate the mode of action: plot the build and decay fluxes of $pA$ as a function of $pA$.
+
+
 *   How can you extract information on the qualitative dynamics, especially the stability of the fixed points, from this plot?
 
 * Evaluate the system for smaller values of $k_2$ and discover another, qualitatively different behavior of the system. How can this behavior be explained?
@@ -69,6 +71,9 @@ sol = solve(prob)
 # Exercise 2
 
 This model of a gene regulatory network was taken from [here](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0003478#pone-0003478-g002)
+
+![Model-sketch](https://journals.plos.org/plosone/article/figure/image?size=inline&id=info:doi/10.1371/journal.pone.0003478.g002)
+
 * If you have time, read the first few paragraphs of the introduction
 
 Assume this model describes a stem cell which is about to differentiate into one of two possible phenotypes (e.g. a skin cell or a muscle cell).
@@ -76,7 +81,7 @@ To know, which cell type this cell has to choose, it processes the external info
 In this model, the ratio is given as parameter `O_by_S == p[1]`.
 
 * Use your `tune_input` function from exercise 1 to find two different phenotypes (steady states) depending on the input. For reasonable ranges of the input, browse the paper)
-* Why is there a region of bistability (i.e. a range of inputs with two stable steady states)? 
+* What is the biological meaning of the region of bistability (i.e. a range of inputs with two stable steady states)? 
 
 ````julia
 
