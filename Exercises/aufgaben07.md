@@ -228,13 +228,14 @@ end
 # p2 =O_by_S  a1  a2    b1  b2    b3  γ_n  c1   c2   d1   d2   d3  γ_g
 p2 = [1       .02 .0125 .02 .0125 .03 .01  .05 .0125 .05 .0125 .05 .01]
 u2 = ones(2)
+
+# smiley cat \:smiley_cat: +Tab
+😺 = 1
 ````
 
 
 ````
-2-element Array{Float64,1}:
- 1.0
- 1.0
+1
 ````
 
 
