@@ -69,7 +69,6 @@ using DifferentialEquations, Plots
 function enzyme_ode!(du, u, p, t)
     S1, S2, S3, P = u
     S, v0,  v1, v2,  v3, K0, K1, K2, K3 = p 
-
     dS1 = v0*S /(K0 + S ) - v1*S1/(K1 + S1)
     dS2 = v1*S1/(K1 + S1) - v2*S2/(K2 + S2)
     dS3 = v2*S2/(K2 + S2) - v3*S3/(K3 + S3)
@@ -181,9 +180,10 @@ enzyme_ode!(zeros(4), [steady_sol.u... 0], p, 0.1)[4]
     * Look at: http://docs.juliadiffeq.org/latest/analysis/sensitivity.html#Examples-using-ForwardDiff.jl-1
 
 ````julia
-using ForwardDiff
+using ForwardDiff, DiffResults
+using ReverseDiff
 
-function enzyme_ode!(du, u, p)
+function enzyme_ode!(du, u, p,t)
     S1, S2, S3, P = u
     S, v0,  v1, v2, v3, K0, K1, K2, K3 = p 
 
@@ -194,11 +194,12 @@ function enzyme_ode!(du, u, p)
     
     du
 end
+steady_sol = [0.1; 10; 0.1]
+u0 = [steady_sol...; 0] #[S1, S2, S3, P]
+p = [1; 0.1; 1; 0.1; 5; 0.1; 1; 1; 5]; #[S,  v0, K0, v1, K1, v2, K2, v3, K3]
 
-u0 = [steady_sol... 0] #[S1, S2, S3, P]
-p = [1 0.1 1 0.1 5 0.1 1 1 5] #[S, v0, K0, v1, K1, v2, K2, v3, K3]
-
-tspan = (0., 1e10)
+tspan = (0., 10.)
+enzyme_ode!(zeros(4), u0, p, 0.1)
 prob = ODEProblem(enzyme_ode!, u0, tspan, p)
 sol = solve(prob)
 
@@ -223,9 +224,13 @@ derivs = ForwardDiff.jacobian(sj,lp)
 
 
 ````
-Error: TypeError: in setfield!, expected Float64, got ForwardDiff.Dual{Noth
-ing,Float64,9}
+4×9 Array{Float64,2}:
+ 0.0999742    1.09972     -1.09972      …   0.0          0.0       
+ 0.0072379    0.0796169    0.0109176        0.00823041   0.0       
+ 0.000591409  0.0065055    0.00101057      -0.091903     0.99998   
+ 0.000580657  0.00638722   0.000992195     -0.090232    -1.98667e-5
 ````
+
 
 
 
@@ -236,48 +241,22 @@ ing,Float64,9}
 ````julia
 using DataFrames, DataFramesMeta, Gadfly
 parsymbols = [:S, :v0,  :v1, :v2, :v3, :K0, :K1, :K2, :K3]
-df =  DataFrame(derivs', [:S1, :S2, :S3, :J1])
-````
-
-
-````
-Error: UndefVarError: derivs not defined
-````
-
-
-
-````julia
+df =  DataFrame(derivs', [:S1, :S2, :S3, :J1]) 
 df =  @transform(df, par = parsymbols)
-````
-
-
-````
-Error: UndefVarError: df not defined
-````
-
-
-
-````julia
 df = stack(df, [1:4;])
-````
-
-
-````
-Error: UndefVarError: df not defined
-````
-
-
-
-````julia
 Gadfly.plot(df, x = :par, y = :value, xgroup = :variable, color = :par, Geom.subplot_grid(Geom.bar))
 ````
 
 
 ````
-Error: UndefVarError: df not defined
+Error: The Cairo and Fontconfig packages are necessary for saving as PNG.
+Add them with the package manager if necessary, then run:
+  import Cairo, Fontconfig
+before invoking PNG.
 ````
 
 
+![](figures/aufgaben06_solution_6_1.png)
 
 
 
