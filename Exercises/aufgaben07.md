@@ -39,6 +39,8 @@ sol = solve(prob)
 
 * Compare the solution with the solution without a positive feedback.
 ````julia
+using DifferentialEquations, Plots
+
 function feedback!(du, u, p, t) 
     # A and pA are actually functionally related via mass conservation
     # \dot{A}+\dot{pA} = 0 -> A+pA = const
@@ -67,27 +69,7 @@ u0 =  [1. 0] # A, pA
 tspan = 20.
 
 prob = ODEProblem(feedback!, u0, tspan, p)
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 sol = solve(prob)
-````
-
-
-````
-Error: UndefVarError: solve not defined
-````
-
-
-
-````julia
 # For the tutorial: in this solution, the adaptive step-size of the solver algorithm can nicely be seen
 
 # .. Without feedback
@@ -96,45 +78,20 @@ u0 =  [1. 0] # A, pA
 tspan = (0, 20.)
 
 prob_nofb = ODEProblem(feedback!, u0, tspan, p_nofb)
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 sol_nofb = solve(prob_nofb)
-````
-
-
-````
-Error: UndefVarError: solve not defined
-````
-
-
-
-````julia
 
 plot(sol)
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 plotattr("linestyle")
 ````
 
 
 ````
-Error: UndefVarError: plotattr not defined
+linestyle {Symbol}
+linestyles, ls, s, style
+
+Style of the line (for path and bar stroke).  Choose from Symbol[:auto, :so
+lid, :dash, :dot, :dashdot, :dashdotdot]
+Series attribute,  default: solid
 ````
 
 
@@ -144,11 +101,7 @@ plot!(sol_nofb, linestyle = :dash)
 ````
 
 
-````
-Error: UndefVarError: plot! not defined
-````
-
-
+![](figures/aufgaben07_solution_2_1.png)
 
 
 
@@ -166,131 +119,21 @@ Error: UndefVarError: plot! not defined
 
 ````julia
 prob_ss = SteadyStateProblem(feedback!, u0, p)
-````
-
-
-````
-Error: UndefVarError: SteadyStateProblem not defined
-````
-
-
-
-````julia
 sol_ss = solve(prob_ss, DynamicSS(Tsit5(), tspan = 1e5), 
     reltol = 1e-16, abstol = 1e-16, save_everystep = false)[end]
-````
-
-
-````
-Error: UndefVarError: Tsit5 not defined
-````
-
-
-
-````julia
 feedback!(zeros(2), sol_ss, p, .1)
-````
-
-
-````
-Error: UndefVarError: sol_ss not defined
-````
-
-
-
-````julia
 
 sol_ss = solve(prob_ss, SSRootfind(), reltol = 1e-16, abstol = 1e-16)
-````
-
-
-````
-Error: UndefVarError: SSRootfind not defined
-````
-
-
-
-````julia
 feedback!(zeros(2), sol_ss, p, .1)
-````
-
-
-````
-Error: UndefVarError: sol_ss not defined
-````
-
-
-
-````julia
 
 prob = ODEProblem(feedback!, u0, 1e2, p)
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 sol = solve(prob, save_everystep = false)[end]
-````
-
-
-````
-Error: UndefVarError: solve not defined
-````
-
-
-
-````julia
 feedback!(zeros(2), sol, p, .1)
-````
-
-
-````
-Error: UndefVarError: sol not defined
-````
-
-
-
-````julia
 
 # quick check if it works for p=0
 prob = ODEProblem(feedback!, u0, 1e2, [0 p[2:end]...])
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 sol = solve(prob)
-````
-
-
-````
-Error: UndefVarError: solve not defined
-````
-
-
-
-````julia
 feedback!(zeros(2), sol[end], p, .1)
-````
-
-
-````
-Error: UndefVarError: sol not defined
-````
-
-
-
-````julia
 
 function tune_input(f, u0, input, p)
     # ensure that the right prob is chosen
@@ -311,25 +154,11 @@ end
 u0 =  [1. 0] # A, pA 
 input = [0:0.01:2... reverse([0:0.01:2...])...]
 outputs = tune_input(feedback!, u0, input, p)
-````
-
-
-````
-Error: UndefVarError: ODEProblem not defined
-````
-
-
-
-````julia
 plot(outputs[:,1], outputs[:, end])
 ````
 
 
-````
-Error: UndefVarError: outputs not defined
-````
-
-
+![](figures/aufgaben07_solution_3_1.png)
 
 
 
@@ -342,25 +171,11 @@ end
 
 rates = hcat([fb_rates(x,p) for x in 0:0.02:1]...)
 plot(0:0.02:1, rates[1,:])
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 plot!(0:0.02:1, rates[2,:], color = :red)
 ````
 
 
-````
-Error: UndefVarError: plot! not defined
-````
-
-
+![](figures/aufgaben07_solution_4_1.png)
 
 
 *   How can you extract information on the qualitative dynamics, especially the stability of the fixed points, from this plot?
@@ -378,27 +193,7 @@ end
 
 rates = hcat([fb_rates(x,p) for x in 0:0.02:1]...)
 plot(0:0.02:1, rates[1,:])
-````
-
-
-````
-Error: UndefVarError: plot not defined
-````
-
-
-
-````julia
 plot!(0:0.02:1, rates[2,:], color = :red)
-````
-
-
-````
-Error: UndefVarError: plot! not defined
-````
-
-
-
-````julia
 # stable fixed point at pA ~ 0.1, 0.4, instable fixed point at pA ~ 0.2
 ````
 
@@ -443,7 +238,7 @@ prob2 = SteadyStateProblem(model2!, u2,p2)
 
 
 ````
-Error: UndefVarError: SteadyStateProblem not defined
+Error: UndefVarError: model2! not defined
 ````
 
 
@@ -454,7 +249,7 @@ Error: UndefVarError: SteadyStateProblem not defined
 
 
 ````
-Error: UndefVarError: solve not defined
+Error: UndefVarError: prob2 not defined
 ````
 
 
