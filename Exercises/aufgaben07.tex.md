@@ -205,7 +205,7 @@ plot!(0:0.02:1, rates[2,:], color = :red)
 
 
 
-
+.
 
 # Exercise 2
 
@@ -223,7 +223,6 @@ In this model, the ratio is given as parameter `O_by_S == p[1]`.
 * What is the biological meaning of the region of bistability (i.e. a range of inputs with two stable steady states)? 
 
 ````julia
-
 function model2!(du, u, p, t)
     N, G = u
     O_by_S,    a1,a2,b1,b2,b3,γ_n,c1,c2,d1,d2,d3,γ_g = p
@@ -236,87 +235,31 @@ u2 = ones(2)
 ````
 
 
+````
+2-element Array{Float64,1}:
+ 1.0
+ 1.0
+````
+
+
+
 ````julia
 prob2 = SteadyStateProblem(model2!, u2,p2)
-````
-
-
-````
-Error: UndefVarError: model2! not defined
-````
-
-
-
-````julia
  sol2 = solve(prob2)
-````
-
-
-````
-Error: UndefVarError: prob2 not defined
-````
-
-
-
-````julia
 # * solve for steadyy states in dependence of O_by_S
 input2 = [0:0.1:20... ]
 outputs2 = tune_input(model2!, u2, input2, p2)
-````
-
-
-````
-Error: UndefVarError: model2! not defined
-````
-
-
-
-````julia
 
 u3 = outputs2[end, 2:3]
-````
-
-
-````
-Error: UndefVarError: outputs2 not defined
-````
-
-
-
-````julia
 input3 = reverse([9:0.1:20...])
 outputs3 = tune_input(model2!, u3, input3, p2)
-````
-
-
-````
-Error: UndefVarError: model2! not defined
-````
-
-
-
-````julia
 
 plot(outputs2[:,1], outputs2[:, 2:end])
-````
-
-
-````
-Error: UndefVarError: outputs2 not defined
-````
-
-
-
-````julia
 plot!(outputs3[:,1], outputs3[:,2:end], linestyle = :dot)
 ````
 
 
-````
-Error: UndefVarError: outputs3 not defined
-````
-
-
+![](figures/aufgaben07_solution_7_1.png)
 
 
 
