@@ -38,6 +38,117 @@ sol = solve(prob)
 
 
 * Compare the solution with the solution without a positive feedback.
+````julia
+function feedback!(du, u, p, t) 
+    # A and pA are actually functionally related via mass conservation
+    # \dot{A}+\dot{pA} = 0 -> A+pA = const
+    A, pA = u
+    S, k1, k_1, k2, Km = p
+    du[2] = (k1*S+k2*pA^4/(Km^4 + pA^4))*A - k_1*pA
+    du[1] = -du[2]
+    return du 
+end
+
+function feedback2!(du, u, p, t) 
+    # Here, I put in already the mass conservation
+    #   by setting A+pA=1 --> A = 1-pA in the du[2] expression
+    # I only keep A as a state because I'm too lazy to write a function 
+    #   which takes the solution of \dot{pA} as input and returns A
+    A, pA = u
+    S, k1, k_1, k2, Km = p
+    du[2] = (k1*S+k2*pA^4/(Km^4 + pA^4))*(1-pA) - k_1*pA
+    du[1] = -du[2]
+    return du
+end
+
+# .. With feedback
+p =  [1 0.1 1 2 0.3] # S, k1, k_1, k2, Km
+u0 =  [1. 0] # A, pA 
+tspan = 20.
+
+prob = ODEProblem(feedback!, u0, tspan, p)
+````
+
+
+````
+Error: UndefVarError: ODEProblem not defined
+````
+
+
+
+````julia
+sol = solve(prob)
+````
+
+
+````
+Error: UndefVarError: solve not defined
+````
+
+
+
+````julia
+# For the tutorial: in this solution, the adaptive step-size of the solver algorithm can nicely be seen
+
+# .. Without feedback
+p_nofb =  [1 0.1 1 0 0.3] # S, k1, k_1, k2, Km
+u0 =  [1. 0] # A, pA 
+tspan = (0, 20.)
+
+prob_nofb = ODEProblem(feedback!, u0, tspan, p_nofb)
+````
+
+
+````
+Error: UndefVarError: ODEProblem not defined
+````
+
+
+
+````julia
+sol_nofb = solve(prob_nofb)
+````
+
+
+````
+Error: UndefVarError: solve not defined
+````
+
+
+
+````julia
+
+plot(sol)
+````
+
+
+````
+Error: UndefVarError: plot not defined
+````
+
+
+
+````julia
+plotattr("linestyle")
+````
+
+
+````
+Error: UndefVarError: plotattr not defined
+````
+
+
+
+````julia
+plot!(sol_nofb, linestyle = :dash)
+````
+
+
+````
+Error: UndefVarError: plot! not defined
+````
+
+
 
 
 
@@ -51,16 +162,249 @@ sol = solve(prob)
     * Plot `pA` vs `S`.
     * How is the observed phenomenon called in physics?
     * What is its meaning in biological systems? 
+    * Run with k2 = 0.8
+
+````julia
+prob_ss = SteadyStateProblem(feedback!, u0, p)
+````
+
+
+````
+Error: UndefVarError: SteadyStateProblem not defined
+````
+
+
+
+````julia
+sol_ss = solve(prob_ss, DynamicSS(Tsit5(), tspan = 1e5), 
+    reltol = 1e-16, abstol = 1e-16, save_everystep = false)[end]
+````
+
+
+````
+Error: UndefVarError: Tsit5 not defined
+````
+
+
+
+````julia
+feedback!(zeros(2), sol_ss, p, .1)
+````
+
+
+````
+Error: UndefVarError: sol_ss not defined
+````
+
+
+
+````julia
+
+sol_ss = solve(prob_ss, SSRootfind(), reltol = 1e-16, abstol = 1e-16)
+````
+
+
+````
+Error: UndefVarError: SSRootfind not defined
+````
+
+
+
+````julia
+feedback!(zeros(2), sol_ss, p, .1)
+````
+
+
+````
+Error: UndefVarError: sol_ss not defined
+````
+
+
+
+````julia
+
+prob = ODEProblem(feedback!, u0, 1e2, p)
+````
+
+
+````
+Error: UndefVarError: ODEProblem not defined
+````
+
+
+
+````julia
+sol = solve(prob, save_everystep = false)[end]
+````
+
+
+````
+Error: UndefVarError: solve not defined
+````
+
+
+
+````julia
+feedback!(zeros(2), sol, p, .1)
+````
+
+
+````
+Error: UndefVarError: sol not defined
+````
+
+
+
+````julia
+
+# quick check if it works for p=0
+prob = ODEProblem(feedback!, u0, 1e2, [0 p[2:end]...])
+````
+
+
+````
+Error: UndefVarError: ODEProblem not defined
+````
+
+
+
+````julia
+sol = solve(prob)
+````
+
+
+````
+Error: UndefVarError: solve not defined
+````
+
+
+
+````julia
+feedback!(zeros(2), sol[end], p, .1)
+````
+
+
+````
+Error: UndefVarError: sol not defined
+````
+
+
+
+````julia
+
+function tune_input(f, u0, input, p)
+    # ensure that the right prob is chosen
+    prob = ODEProblem(f, u0, 1e10, p)
+    # preassign output matrix of inputs and steady state pA values
+    out = zeros(length(input), length(prob.u0)+1)
+    out[:,1] = input
+    u0 = copy(u0)
+    for (i,j) in zip(input, 1:length(input))
+        p = [i prob.p[2:end]...]
+        prob = remake(prob, u0 = u0, p = p)
+        #println(feedback!(zeros(2), sol, p, .1))
+        out[j,2:end] = u0[:] = solve(prob)[end]
+    end
+    out
+end
+
+u0 =  [1. 0] # A, pA 
+input = [0:0.01:2... reverse([0:0.01:2...])...]
+outputs = tune_input(feedback!, u0, input, p)
+````
+
+
+````
+Error: UndefVarError: ODEProblem not defined
+````
+
+
+
+````julia
+plot(outputs[:,1], outputs[:, end])
+````
+
+
+````
+Error: UndefVarError: outputs not defined
+````
+
 
 
 
 
 * Generate a rate balance plot to illustrate the mode of action: plot the build and decay fluxes of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/> as a function of <img src="/Exercises/tex/e540f3477f65c70ea7981b19ff465047.svg?invert_in_darkmode&sanitize=true" align=middle width=20.59936559999999pt height=22.465723500000017pt/>.
+````julia
+function fb_rates(pA,p)
+    S, k1, k_1, k2, Km = p
+    [(k1*S+k2*pA^4/(Km^4 + pA^4))*(1-pA); k_1*pA]
+end
+
+rates = hcat([fb_rates(x,p) for x in 0:0.02:1]...)
+plot(0:0.02:1, rates[1,:])
+````
+
+
+````
+Error: UndefVarError: plot not defined
+````
+
+
+
+````julia
+plot!(0:0.02:1, rates[2,:], color = :red)
+````
+
+
+````
+Error: UndefVarError: plot! not defined
+````
+
+
 
 
 *   How can you extract information on the qualitative dynamics, especially the stability of the fixed points, from this plot?
 
+*Blue crossing from above: stable fixed point, blue crossing from below, instable fixed point.*
+
 * Evaluate the system for smaller values of <img src="/Exercises/tex/a8ebf8c468236800b8ed78d42ddbfa57.svg?invert_in_darkmode&sanitize=true" align=middle width=15.11042279999999pt height=22.831056599999986pt/> and discover another, qualitatively different behavior of the system. How can this behavior be explained?
+````julia
+p =  [1 0.1 1 0.8 0.3] # S, k1, k_1, k2, Km
+
+function fb_rates(pA,p)
+    S, k1, k_1, k2, Km = p
+    [(k1*S+k2*pA^4/(Km^4 + pA^4))*(1-pA); k_1*pA]
+end
+
+rates = hcat([fb_rates(x,p) for x in 0:0.02:1]...)
+plot(0:0.02:1, rates[1,:])
+````
+
+
+````
+Error: UndefVarError: plot not defined
+````
+
+
+
+````julia
+plot!(0:0.02:1, rates[2,:], color = :red)
+````
+
+
+````
+Error: UndefVarError: plot! not defined
+````
+
+
+
+````julia
+# stable fixed point at pA ~ 0.1, 0.4, instable fixed point at pA ~ 0.2
+````
+
+
+
+
 
 
 
@@ -92,6 +436,86 @@ p2 = [1       .02 .0125 .02 .0125 .03 .01  .05 .0125 .05 .0125 .05 .01]
 u2 = ones(2)
 ````
 
+
+````julia
+prob2 = SteadyStateProblem(model2!, u2,p2)
+````
+
+
+````
+Error: UndefVarError: SteadyStateProblem not defined
+````
+
+
+
+````julia
+ sol2 = solve(prob2)
+````
+
+
+````
+Error: UndefVarError: solve not defined
+````
+
+
+
+````julia
+# * solve for steadyy states in dependence of O_by_S
+input2 = [0:0.1:20... ]
+outputs2 = tune_input(model2!, u2, input2, p2)
+````
+
+
+````
+Error: UndefVarError: model2! not defined
+````
+
+
+
+````julia
+
+u3 = outputs2[end, 2:3]
+````
+
+
+````
+Error: UndefVarError: outputs2 not defined
+````
+
+
+
+````julia
+input3 = reverse([9:0.1:20...])
+outputs3 = tune_input(model2!, u3, input3, p2)
+````
+
+
+````
+Error: UndefVarError: model2! not defined
+````
+
+
+
+````julia
+
+plot(outputs2[:,1], outputs2[:, 2:end])
+````
+
+
+````
+Error: UndefVarError: outputs2 not defined
+````
+
+
+
+````julia
+plot!(outputs3[:,1], outputs3[:,2:end], linestyle = :dot)
+````
+
+
+````
+Error: UndefVarError: outputs3 not defined
+````
 
 
 
